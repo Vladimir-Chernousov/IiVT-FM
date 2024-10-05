@@ -24,13 +24,7 @@
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QTreeWidget" name="tree">
-      <column>
-       <property name="text">
-        <string notr="true">1</string>
-       </property>
-      </column>
-     </widget>
+     <widget class="QTreeView" name="tree"/>
     </item>
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_2">
