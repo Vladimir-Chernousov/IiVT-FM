@@ -48,7 +48,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "IiVT FileManagen"))
         self.pushButton.setText(_translate("Form", "info"))
         self.pushButton_2.setText(_translate("Form", "copy"))
         self.pushButton_3.setText(_translate("Form", "cut"))

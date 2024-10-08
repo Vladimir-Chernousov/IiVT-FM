@@ -1,8 +1,9 @@
 import sys
 from collections import deque
 
+from PyQt5.QtCore import QDir, Qt
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtWidgets import QApplication, QWidget
+from PyQt5.QtWidgets import QApplication, QWidget, QFileSystemModel, QTreeView
 
 import main_window_disigne
 
@@ -12,15 +13,23 @@ class FileManager(QWidget):
         self.ui = main_window_disigne.Ui_Form()
         self.ui.setupUi(self)
 
-        self.headers = ['Name', 'Height', 'Weight']
+        path = QDir.rootPath()
 
-        self.model = QStandardItemModel()
-        self.model.setHorizontalHeaderLabels(self.headers)
+        self.model = QFileSystemModel()
+        self.model.setRootPath(path)
 
-        self.ui.tree.header().setDefaultSectionSize(180)
         self.ui.tree.setModel(self.model)
-        self.importData(data)
-        self.ui.tree.expandAll()
+        self.ui.tree.setSelectionMode(QTreeView.ExtendedSelection)
+
+        #self.headers = ['Name', 'Height', 'Weight']
+
+        #self.model = QStandardItemModel(self)
+        #self.model.setHorizontalHeaderLabels(self.headers)
+
+        #self.ui.tree.header().setDefaultSectionSize(180)
+        #self.ui.tree.setModel(self.model)
+        #self.importData(data)
+        #self.ui.tree.expandAll()
 
     def importData(self, data, root=None):
         self.model.setRowCount(0)
