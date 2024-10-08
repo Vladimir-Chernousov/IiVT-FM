@@ -1,7 +1,7 @@
 import sys
 from collections import deque
 
-from PyQt5.QtCore import QDir, Qt
+from PyQt5.QtCore import QDir
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QApplication, QWidget, QFileSystemModel, QTreeView
 
