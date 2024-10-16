@@ -1,6 +1,6 @@
 import welcome_widget
 import file_manager
-import crack
+#import crack
 
 def start():
     welcome_widget.main()

@@ -12,7 +12,7 @@ class Welcome(QDialog):
         self.setAttribute(Qt.WA_TranslucentBackground)
 
         label = QLabel()
-        label.setText("ЛУЧШИЙ ФАЙЛОВЫЙ МЕССЕНДЖЕР НА ПЛАНЕТЕ ЗЕМЛЯ!")
+        label.setText("ЛУЧШИЙ ФАЙЛОВЫЙ МЕНЕНДЖЕР НА ПЛАНЕТЕ ЗЕМЛЯ!")
         label.setStyleSheet("""QLabel { color : #fff; 
                                        margin-top: 6px;
                                        margin-bottom: 6px;
