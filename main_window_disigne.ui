@@ -1,72 +1,160 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>649</width>
-    <height>270</height>
+    <width>600</width>
+    <height>400</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>IiVT FileManager</string>
+  <property name="minimumSize">
+   <size>
+    <width>600</width>
+    <height>400</height>
+   </size>
   </property>
-  <widget class="QWidget" name="horizontalLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>19</x>
-     <y>19</y>
-     <width>611</width>
-     <height>231</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <widget class="QTreeView" name="tree"/>
-    </item>
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QPushButton" name="pushButton">
-        <property name="text">
-         <string>info</string>
-        </property>
-       </widget>
+       <widget class="QTreeView" name="tree"/>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_2">
-        <property name="text">
-         <string>copy</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_3">
-        <property name="text">
-         <string>cut</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_5">
-        <property name="text">
-         <string>paste</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_4">
-        <property name="text">
-         <string>delete</string>
-        </property>
-       </widget>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QPushButton" name="pbn_info">
+          <property name="text">
+           <string>info</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pbn_copy">
+          <property name="text">
+           <string>copy</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pbn_cut">
+          <property name="text">
+           <string>cut</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pbn_paste">
+          <property name="text">
+           <string>paste</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pbn_delete">
+          <property name="text">
+           <string>delete</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </item>
    </layout>
   </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>600</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actioninfo"/>
+    <addaction name="actioncopy_2"/>
+    <addaction name="actioncut"/>
+    <addaction name="actionpaste"/>
+    <addaction name="actiondelete"/>
+    <addaction name="actionrename"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout_FileManager"/>
+    <addaction name="actionHelp"/>
+   </widget>
+   <widget class="QMenu" name="menuOptions">
+    <property name="title">
+     <string>Options</string>
+    </property>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuOptions"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <action name="actioninfo">
+   <property name="text">
+    <string>info</string>
+   </property>
+  </action>
+  <action name="actioncopy">
+   <property name="text">
+    <string>copy</string>
+   </property>
+  </action>
+  <action name="actioncopy_2">
+   <property name="text">
+    <string>copy</string>
+   </property>
+  </action>
+  <action name="actioncut">
+   <property name="text">
+    <string>cut</string>
+   </property>
+  </action>
+  <action name="actionpaste">
+   <property name="text">
+    <string>paste</string>
+   </property>
+  </action>
+  <action name="actiondelete">
+   <property name="text">
+    <string>delete</string>
+   </property>
+  </action>
+  <action name="actionAbout_FileManager">
+   <property name="text">
+    <string>About FileManager</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="text">
+    <string>Help</string>
+   </property>
+  </action>
+  <action name="actionrename">
+   <property name="text">
+    <string>rename</string>
+   </property>
+  </action>
+  <action name="actionoptions">
+   <property name="text">
+    <string>options</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

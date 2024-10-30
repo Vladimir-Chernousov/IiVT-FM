@@ -1,14 +1,14 @@
 import sys
 from collections import deque
 from PyQt5.QtCore import QDir
-from PyQt5.QtWidgets import QApplication, QWidget, QFileSystemModel, QTreeView
+from PyQt5.QtWidgets import QApplication, QFileSystemModel, QTreeView, QMainWindow
 
 import main_window_disigne
 
-class FileManager(QWidget):
+class FileManager(QMainWindow):
     def __init__(self):
         super(FileManager, self).__init__()
-        self.ui = main_window_disigne.Ui_Form()
+        self.ui = main_window_disigne.Ui_MainWindow()
         self.ui.setupUi(self)
 
         path = QDir.rootPath()
