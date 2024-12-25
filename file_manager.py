@@ -48,7 +48,7 @@ class FileManager(QMainWindow):
 
     def pbn_copy(self):
         print('copy')
-        self.commandString = 'xcopy /s /y "' + self.currentPath + '"'
+        self.commandString = 'xcopy /e /s /y "' + self.currentPath + '"'
         print(self.commandString)
 
     def pbn_paste(self):
@@ -67,7 +67,7 @@ class FileManager(QMainWindow):
 
     def pbn_delete(self):
         print('delete')
-        print('del "' + self.currentPath + '" /Y')
+        print('del /q /s /y "' + self.currentPath + '"')
         try:
             os.system('del "' + self.currentPath + '"')
         except:
