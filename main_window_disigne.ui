@@ -20,7 +20,7 @@
    <bool>false</bool>
   </property>
   <property name="contextMenuPolicy">
-   <enum>Qt::CustomContextMenu</enum>
+   <enum>Qt::DefaultContextMenu</enum>
   </property>
   <property name="acceptDrops">
    <bool>false</bool>
@@ -99,27 +99,19 @@
     <addaction name="actioncut"/>
     <addaction name="actionpaste"/>
     <addaction name="actiondelete"/>
-    <addaction name="actionrename"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
      <string>Help</string>
     </property>
     <addaction name="actionAbout_FileManager"/>
-    <addaction name="actionHelp"/>
-   </widget>
-   <widget class="QMenu" name="menuOptions">
-    <property name="title">
-     <string>Options</string>
-    </property>
    </widget>
    <addaction name="menuFile"/>
-   <addaction name="menuOptions"/>
    <addaction name="menuHelp"/>
   </widget>
   <action name="actioninfo">
    <property name="text">
-    <string>info</string>
+    <string>Info</string>
    </property>
   </action>
   <action name="actioncopy">
@@ -129,22 +121,22 @@
   </action>
   <action name="actioncopy_2">
    <property name="text">
-    <string>copy</string>
+    <string>Copy</string>
    </property>
   </action>
   <action name="actioncut">
    <property name="text">
-    <string>cut</string>
+    <string>Cut</string>
    </property>
   </action>
   <action name="actionpaste">
    <property name="text">
-    <string>paste</string>
+    <string>Paste</string>
    </property>
   </action>
   <action name="actiondelete">
    <property name="text">
-    <string>delete</string>
+    <string>Delete</string>
    </property>
   </action>
   <action name="actionAbout_FileManager">

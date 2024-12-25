@@ -25,7 +25,12 @@ class FileManager(QMainWindow):
         self.ui.pbn_delete.clicked.connect(self.pbn_delete)
         self.ui.pbn_info.clicked.connect(self.pbn_info)
 
-        self.ui.actioninfo.triggered.connect(self.menu_info)
+        self.ui.actioninfo.triggered.connect(self.pbn_info)
+        self.ui.actioncopy_2.triggered.connect(self.pbn_copy)
+        self.ui.actioncut.triggered.connect(self.pbn_cut)
+        self.ui.actionpaste.triggered.connect(self.pbn_paste)
+        self.ui.actiondelete.triggered.connect(self.pbn_delete)
+        self.ui.actionAbout_FileManager.triggered.connect(self.about)
 
 
     def pbn_cut(self):
@@ -43,8 +48,8 @@ class FileManager(QMainWindow):
     def pbn_info(self):
         print('pbn_info')
 
-    def menu_info(self):
-        pass
+    def about(self):
+        print('about')
 
     def contextMenuEvent(self, event):
         contextMenu = QMenu()
