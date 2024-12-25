@@ -1,6 +1,6 @@
 import sys
 from collections import deque
-from PyQt5.QtCore import QDir
+from PyQt5.QtCore import QDir, Qt
 from PyQt5.QtWidgets import QApplication, QFileSystemModel, QTreeView, QMainWindow, QMenu
 
 import main_window_disigne
@@ -71,6 +71,20 @@ class FileManager(QMainWindow):
             self.pbn_paste()
         elif action == deleteAction:
             self.pbn_delete()
+
+    def keyPressEvent(self, event):
+        print(event.key())
+        if event.key() == 67 or event.key() == 16777268:
+            self.pbn_copy()
+        elif event.key() == 86:
+            self.pbn_paste()
+        elif event.key() == 88:
+            self.pbn_cut()
+        elif event.key() == 16777272 or event.key() == 81:
+            self.pbn_delete()
+        elif event.key() == 16777264:
+            self.about()
+        event.accept()
 
 
 
