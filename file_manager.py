@@ -1,6 +1,7 @@
 import sys
+import os
 from collections import deque
-from PyQt5.QtCore import QDir, Qt
+from PyQt5.QtCore import QDir, QModelIndex
 from PyQt5.QtWidgets import QApplication, QFileSystemModel, QTreeView, QMainWindow, QMenu
 
 import main_window_disigne
@@ -32,18 +33,39 @@ class FileManager(QMainWindow):
         self.ui.actiondelete.triggered.connect(self.pbn_delete)
         self.ui.actionAbout_FileManager.triggered.connect(self.about)
 
+    currentPath = ''
+    commandString = ''
+    def on_tree_clicked(self, index):
+        self.currentPath = self.model.filePath(index).replace('/', '\\')
+
+
 
     def pbn_cut(self):
         print('cut')
+        self.commandString = 'move "' + self.currentPath + '"'
 
     def pbn_copy(self):
         print('copy')
+        self.commandString = 'xcopy "' + self.currentPath + '"'
+        print(self.commandString)
 
     def pbn_paste(self):
         print('paste')
+        if (self.commandString != ''):
+            try:
+                self.commandString += ' ' + '\\'.join(self.currentPath.split('\\')[:-1])+'\\'
+                print(self.commandString)
+                os.system(self.commandString)
+            except:
+                pass
 
     def pbn_delete(self):
         print('delete')
+        print('del "' + self.currentPath + '"')
+        try:
+            os.system('del "' + self.currentPath + '"')
+        except:
+            pass
 
     def pbn_info(self):
         print('pbn_info')
@@ -89,6 +111,7 @@ class FileManager(QMainWindow):
 
 
 def main():
+    os.system("chcp 65001 > nul")
     app = QApplication(sys.argv)
     ex = FileManager()
     ex.show()
