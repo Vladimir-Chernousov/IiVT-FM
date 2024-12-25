@@ -67,7 +67,7 @@ class FileManager(QMainWindow):
 
     def pbn_delete(self):
         print('delete')
-        print('del /q /s /y "' + self.currentPath + '"')
+        print('del /s /y "' + self.currentPath + '"')
         try:
             os.system('del "' + self.currentPath + '"')
         except:
