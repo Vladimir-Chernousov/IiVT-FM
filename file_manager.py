@@ -35,33 +35,39 @@ class FileManager(QMainWindow):
 
     currentPath = ''
     commandString = ''
+    isDirectory = True
     def on_tree_clicked(self, index):
         self.currentPath = self.model.filePath(index).replace('/', '\\')
+        self.isDirectory = self.model.isDir(index)
 
 
 
     def pbn_cut(self):
         print('cut')
-        self.commandString = 'move "' + self.currentPath + '"'
+        self.commandString = 'move /y "' + self.currentPath + '"'
 
     def pbn_copy(self):
         print('copy')
-        self.commandString = 'xcopy "' + self.currentPath + '"'
+        self.commandString = 'xcopy /s /y "' + self.currentPath + '"'
         print(self.commandString)
 
     def pbn_paste(self):
         print('paste')
         if (self.commandString != ''):
             try:
-                self.commandString += ' ' + '\\'.join(self.currentPath.split('\\')[:-1])+'\\'
+                if (self.isDirectory):
+                    self.commandString += ' "' + self.currentPath + '"'
+                else:
+                    self.commandString += ' "' + '\\'.join(self.currentPath.split('\\')[:-1]) + '"'
                 print(self.commandString)
                 os.system(self.commandString)
+                self.commandString = ''
             except:
                 pass
 
     def pbn_delete(self):
         print('delete')
-        print('del "' + self.currentPath + '"')
+        print('del "' + self.currentPath + '" /Y')
         try:
             os.system('del "' + self.currentPath + '"')
         except:
