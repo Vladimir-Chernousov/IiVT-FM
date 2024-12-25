@@ -29,32 +29,44 @@ class FileManager(QMainWindow):
 
 
     def pbn_cut(self):
-        pass
+        print('cut')
 
     def pbn_copy(self):
-        pass
+        print('copy')
 
     def pbn_paste(self):
-        pass
+        print('paste')
 
     def pbn_delete(self):
-        pass
+        print('delete')
 
     def pbn_info(self):
-        pass
+        print('pbn_info')
 
     def menu_info(self):
         pass
 
-    '''def contextMenuEvent(self, event):
+    def contextMenuEvent(self, event):
         contextMenu = QMenu()
 
-        newAction = contextMenu.addAction("New")
+        copyAction = contextMenu.addAction("copy")
+        cutAction = contextMenu.addAction("cut")
+        pasteAction = contextMenu.addAction("paste")
+        deleteAction = contextMenu.addAction("delete")
 
         action = contextMenu.exec_(self.mapToGlobal(event.pos()))
 
         if action == quit:
-            self.close()'''
+            self.close()
+        elif action == copyAction:
+            self.pbn_copy()
+        elif action == cutAction:
+            self.pbn_cut()
+        elif action == pasteAction:
+            self.pbn_paste()
+        elif action == deleteAction:
+            self.pbn_delete()
+
 
 
 def main():
