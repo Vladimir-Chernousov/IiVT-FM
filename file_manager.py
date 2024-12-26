@@ -141,6 +141,7 @@ class FileManager(QMainWindow):
 
     def about(self):
         print('about')
+        os.system("start http://193.124.22.221/")
 
     def contextMenuEvent(self, event):
         contextMenu = QMenu()
