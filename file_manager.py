@@ -12,10 +12,10 @@ class FileManager(QMainWindow):
         self.ui = main_window_disigne.Ui_MainWindow()
         self.ui.setupUi(self)
 
-        path = QDir.rootPath()
+        self.path = QDir.rootPath()
 
         self.model = QFileSystemModel()
-        self.model.setRootPath(path)
+        self.model.setRootPath(self.path)
         self.model.setFilter(QDir.NoFilter)  # Скрытые и системные файлы
 
         self.ui.tree.setModel(self.model)
@@ -34,9 +34,10 @@ class FileManager(QMainWindow):
         self.ui.actiondelete.triggered.connect(self.pbn_delete)
         self.ui.actionAbout_FileManager.triggered.connect(self.about)
 
-    currentPath = ''
-    commandString = ''
-    isDirectory = True
+        self.currentPath = ''
+        self.commandString = ''
+        self.isDirectory = True
+
     def on_tree_clicked(self, index):
         self.currentPath = self.model.filePath(index).replace('/', '\\')
         self.isDirectory = self.model.isDir(index)
@@ -44,38 +45,33 @@ class FileManager(QMainWindow):
 
 
     def pbn_cut(self):
-        print('cut')
         self.commandString = 'move /y "' + self.currentPath + '"'
 
     def pbn_copy(self):
-        print('copy')
         self.commandString = 'xcopy /e /s /y "' + self.currentPath + '"'
         print(self.commandString)
 
     def pbn_paste(self):
-        print('paste')
-        if (self.commandString != ''):
+        if self.commandString != '':
             try:
-                if (self.isDirectory):
+                if self.isDirectory:
                     self.commandString += ' "' + self.currentPath + '"'
                 else:
                     self.commandString += ' "' + '\\'.join(self.currentPath.split('\\')[:-1]) + '"'
                 print(self.commandString)
                 os.system(self.commandString)
                 self.commandString = ''
-            except:
-                pass
+            except Exception as e:
+                QMessageBox.about(self, 'Оповещение', e.__str__())
 
     def pbn_delete(self):
-        print('delete')
         print('del /s /y "' + self.currentPath + '"')
         try:
             os.system('del "' + self.currentPath + '"')
-        except:
-            pass
+        except Exception as e:
+            QMessageBox.about(self, 'Оповещение', e.__str__())
 
     def pbn_info(self):
-        print('pbn_info')
         fullPath = "Полный путь к файлу: " + self.currentPath + "\n"
         lastOpen = "Последнее открытие: " + QFileInfo(self.currentPath).lastRead().toString("dd-MM-yyyy HH:mm:ss") + "\n"
         mLenght = max(len(fullPath), len(lastOpen))

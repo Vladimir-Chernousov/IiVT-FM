@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>400</height>
+    <width>851</width>
+    <height>492</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -26,7 +26,7 @@
    <bool>false</bool>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>IiVT-FM</string>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>
@@ -36,7 +36,20 @@
     <item row="0" column="0">
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QTreeView" name="tree"/>
+       <widget class="QTreeView" name="tree">
+        <property name="minimumSize">
+         <size>
+          <width>750</width>
+          <height>450</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>750</width>
+          <height>450</height>
+         </size>
+        </property>
+       </widget>
       </item>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -86,7 +99,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>600</width>
+     <width>851</width>
      <height>21</height>
     </rect>
    </property>
@@ -106,7 +119,15 @@
     </property>
     <addaction name="actionAbout_FileManager"/>
    </widget>
+   <widget class="QMenu" name="menuOption">
+    <property name="title">
+     <string>Option</string>
+    </property>
+    <addaction name="action"/>
+    <addaction name="action_2"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuOption"/>
    <addaction name="menuHelp"/>
   </widget>
   <action name="actioninfo">
@@ -157,6 +178,16 @@
   <action name="actionoptions">
    <property name="text">
     <string>options</string>
+   </property>
+  </action>
+  <action name="action">
+   <property name="text">
+    <string>Нужен список.</string>
+   </property>
+  </action>
+  <action name="action_2">
+   <property name="text">
+    <string>Того что мы хотим</string>
    </property>
   </action>
  </widget>

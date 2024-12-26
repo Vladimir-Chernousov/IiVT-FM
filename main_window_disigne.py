@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(600, 400)
+        MainWindow.resize(851, 492)
         MainWindow.setMinimumSize(QtCore.QSize(600, 400))
         MainWindow.setMouseTracking(False)
         MainWindow.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
@@ -27,6 +27,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.tree = QtWidgets.QTreeView(self.centralwidget)
+        self.tree.setMinimumSize(QtCore.QSize(750, 450))
+        self.tree.setMaximumSize(QtCore.QSize(750, 450))
         self.tree.setObjectName("tree")
         self.horizontalLayout.addWidget(self.tree)
         self.verticalLayout = QtWidgets.QVBoxLayout()
@@ -50,12 +52,14 @@ class Ui_MainWindow(object):
         self.gridLayout.addLayout(self.horizontalLayout, 0, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 600, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 851, 21))
         self.menubar.setObjectName("menubar")
         self.menuFile = QtWidgets.QMenu(self.menubar)
         self.menuFile.setObjectName("menuFile")
         self.menuHelp = QtWidgets.QMenu(self.menubar)
         self.menuHelp.setObjectName("menuHelp")
+        self.menuOption = QtWidgets.QMenu(self.menubar)
+        self.menuOption.setObjectName("menuOption")
         MainWindow.setMenuBar(self.menubar)
         self.actioninfo = QtWidgets.QAction(MainWindow)
         self.actioninfo.setObjectName("actioninfo")
@@ -77,13 +81,20 @@ class Ui_MainWindow(object):
         self.actionrename.setObjectName("actionrename")
         self.actionoptions = QtWidgets.QAction(MainWindow)
         self.actionoptions.setObjectName("actionoptions")
+        self.action = QtWidgets.QAction(MainWindow)
+        self.action.setObjectName("action")
+        self.action_2 = QtWidgets.QAction(MainWindow)
+        self.action_2.setObjectName("action_2")
         self.menuFile.addAction(self.actioninfo)
         self.menuFile.addAction(self.actioncopy_2)
         self.menuFile.addAction(self.actioncut)
         self.menuFile.addAction(self.actionpaste)
         self.menuFile.addAction(self.actiondelete)
         self.menuHelp.addAction(self.actionAbout_FileManager)
+        self.menuOption.addAction(self.action)
+        self.menuOption.addAction(self.action_2)
         self.menubar.addAction(self.menuFile.menuAction())
+        self.menubar.addAction(self.menuOption.menuAction())
         self.menubar.addAction(self.menuHelp.menuAction())
 
         self.retranslateUi(MainWindow)
@@ -91,7 +102,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "IiVT-FM"))
         self.pbn_info.setText(_translate("MainWindow", "info"))
         self.pbn_copy.setText(_translate("MainWindow", "copy"))
         self.pbn_cut.setText(_translate("MainWindow", "cut"))
@@ -99,6 +110,7 @@ class Ui_MainWindow(object):
         self.pbn_delete.setText(_translate("MainWindow", "delete"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.menuHelp.setTitle(_translate("MainWindow", "Help"))
+        self.menuOption.setTitle(_translate("MainWindow", "Option"))
         self.actioninfo.setText(_translate("MainWindow", "Info"))
         self.actioncopy.setText(_translate("MainWindow", "copy"))
         self.actioncopy_2.setText(_translate("MainWindow", "Copy"))
@@ -109,6 +121,8 @@ class Ui_MainWindow(object):
         self.actionHelp.setText(_translate("MainWindow", "Help"))
         self.actionrename.setText(_translate("MainWindow", "rename"))
         self.actionoptions.setText(_translate("MainWindow", "options"))
+        self.action.setText(_translate("MainWindow", "Нужен список."))
+        self.action_2.setText(_translate("MainWindow", "Того что мы хотим"))
 
 
 if __name__ == "__main__":
