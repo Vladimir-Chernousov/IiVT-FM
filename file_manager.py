@@ -76,12 +76,25 @@ class FileManager(QMainWindow):
 
     def pbn_info(self):
         print('pbn_info')
+        fullPath = "Полный путь к файлу: " + self.currentPath + "\n"
+        lastOpen = "Последнее открытие: " + QFileInfo(self.currentPath).lastRead().toString("dd-MM-yyyy HH:mm:ss") + "\n"
+        mLenght = max(len(fullPath), len(lastOpen))
+        if mLenght == len(fullPath):
+            sub = len(fullPath) - len(lastOpen)
+            lastOpen = "Последнее открытие: " + sub * " " + QFileInfo(self.currentPath).lastRead().toString("dd-MM-yyyy HH:mm:ss") + "\n"
+        else:
+            sub = len(lastOpen) - len(fullPath)
+            fullPath = "Полный путь к файлу: " + sub * " " + self.currentPath + "\n"
+
+        lenFileSize = len("Размер файла :" + f"{QFileInfo(self.currentPath).size() / 1024:.3f} kByte" + "\n")
+        fileSize = "Размер файла :" + (mLenght - lenFileSize) * " " + f"{QFileInfo(self.currentPath).size() / 1024:.3f} kByte" + "\n"
+
         if self.currentPath != '':
-            msgText = "Создание: " + QFileInfo(self.currentPath).created().toString("dd-MM-yyyy HH:mm:ss") + "\n"
-            msgText += "Изменеие: " + QFileInfo(self.currentPath).lastModified().toString("dd-MM-yyyy HH:mm:ss") + "\n"
-            msgText += "Последнее открытие: " + QFileInfo(self.currentPath).lastRead().toString("dd-MM-yyyy HH:mm:ss") + "\n"
-            msgText += f"Размер файла : {QFileInfo(self.currentPath).size() / 1024:.3f} kByte" + "\n"
-            msgText += "Полный путь к файлу: " + self.currentPath + "\n"
+            msgText = "Создание: " + (mLenght - 30) * " " + QFileInfo(self.currentPath).created().toString("dd-MM-yyyy HH:mm:ss") + "\n"
+            msgText += "Изменение: " + (mLenght - 31) * " " + QFileInfo(self.currentPath).lastModified().toString("dd-MM-yyyy HH:mm:ss") + "\n"
+            msgText += lastOpen
+            msgText += fileSize
+            msgText += fullPath
             msgText += "Тип файла: ." + QFileInfo(self.currentPath).suffix() + "\n"
             msgText += "Исполняемый: " + str(QFileInfo(self.currentPath).isExecutable()) + "\n"
             msgText += "Скрытый: " + str(QFileInfo(self.currentPath).isHidden()) + "\n"
@@ -92,6 +105,13 @@ class FileManager(QMainWindow):
         msg.setWindowTitle("Информация о файле")
         msg.setText(msgText)
         msg.setIcon(QMessageBox.Information)
+        msg.setStyleSheet(
+            """
+            QMessageBox {
+                font-family: consolas;
+            }         
+            """
+        )
         msg.exec_()
 
 
