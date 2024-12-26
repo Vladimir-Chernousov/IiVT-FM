@@ -16,6 +16,7 @@ class FileManager(QMainWindow):
 
         self.model = QFileSystemModel()
         self.model.setRootPath(path)
+        self.model.setFilter(QDir.NoFilter)  # Скрытые и системные файлы
 
         self.ui.tree.setModel(self.model)
         self.ui.tree.setSelectionMode(QTreeView.ExtendedSelection)
