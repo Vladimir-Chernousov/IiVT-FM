@@ -1,8 +1,11 @@
 import sys
 import os
+import webbrowser
 from collections import deque
+import requests
 from PyQt5.QtCore import QDir, QFileInfo
 from PyQt5.QtWidgets import QApplication, QFileSystemModel, QTreeView, QMainWindow, QMenu, QMessageBox
+from urllib3 import HTTPConnectionPool
 
 import main_window_disigne
 
@@ -33,6 +36,12 @@ class FileManager(QMainWindow):
         self.ui.actionpaste.triggered.connect(self.pbn_paste)
         self.ui.actiondelete.triggered.connect(self.pbn_delete)
         self.ui.actionAbout_FileManager.triggered.connect(self.about)
+        self.ui.actionPaint.triggered.connect(self.open_paint)
+        self.ui.actionCalk.triggered.connect(self.open_calk)
+        self.ui.actionBlok.triggered.connect(self.open_blok)
+        self.ui.actionDispetcher.triggered.connect(self.open_dispatcher)
+        self.ui.actionCmd.triggered.connect(self.open_cmd)
+        self.ui.actionParametrs.triggered.connect(self.open_parameters)
 
         self.current_path = ''
         self.command_string = ''
@@ -42,17 +51,20 @@ class FileManager(QMainWindow):
         self.current_path = self.model.filePath(index).replace('/', '\\')
         self.is_dir = self.model.isDir(index)
 
-
-
     def pbn_cut(self):
+        if self.current_path == '':
+            QMessageBox.about(self, 'Оповещение', 'Ничего не выбрано')
+            return None
         self.command_string = 'move /y "' + self.current_path + '"'
 
     def pbn_copy(self):
+        if self.current_path == '':
+            QMessageBox.about(self, 'Оповещение', 'Ничего не выбрано')
+            return None
         if self.is_dir:
             self.command_string = 'xcopy /e /s /y "' + self.current_path + '"'
         else:
             self.command_string = 'copy /y "' + self.current_path + '"'
-        print(self.command_string)
 
     def pbn_paste(self):
         if self.command_string != '':
@@ -66,9 +78,14 @@ class FileManager(QMainWindow):
                 self.command_string = ''
             except Exception as e:
                 QMessageBox.about(self, 'Оповещение', e.__str__())
+        else:
+            QMessageBox.about(self, 'Оповещение', 'Ничего не выбрано')
+            return None
 
     def pbn_delete(self):
-        print('del /s /y "' + self.current_path + '"')
+        if self.current_path == '':
+            QMessageBox.about(self, 'Оповещение', 'Ничего не выбрано')
+            return None
         try:
             os.system('del "' + self.current_path + '"')
         except Exception as e:
@@ -137,11 +154,39 @@ class FileManager(QMainWindow):
         )
         msg.exec_()
 
-
-
     def about(self):
-        print('about')
-        os.system("start http://193.124.22.221/")
+        try:
+            requests.get("http://193.124.22.221")
+            os.system("start http://193.124.22.221/")
+        except Exception:
+            webbrowser.open("about.html")
+
+    def new_folder(self):
+        pass
+
+    def rename(self):
+        pass
+
+    def open(self):
+        pass
+
+    def open_paint(self):
+        pass
+
+    def open_calk(self):
+        pass
+
+    def open_blok(self):
+        pass
+
+    def open_dispatcher(self):
+        pass
+
+    def open_cmd(self):
+        pass
+
+    def open_parameters(self):
+        pass
 
     def contextMenuEvent(self, event):
         contextMenu = QMenu()
@@ -150,6 +195,9 @@ class FileManager(QMainWindow):
         cutAction = contextMenu.addAction("cut")
         pasteAction = contextMenu.addAction("paste")
         deleteAction = contextMenu.addAction("delete")
+        newAction = contextMenu.addAction("New folder")
+        renameAction = contextMenu.addAction("Rename")
+        openAction = contextMenu.addAction("Open as text")
 
         action = contextMenu.exec_(self.mapToGlobal(event.pos()))
 
@@ -163,6 +211,12 @@ class FileManager(QMainWindow):
             self.pbn_paste()
         elif action == deleteAction:
             self.pbn_delete()
+        elif action == newAction:
+            self.new_folder()
+        elif action == renameAction:
+            self.rename()
+        elif action == openAction:
+            self.open()
 
     def keyPressEvent(self, event):
         print(event.key())
