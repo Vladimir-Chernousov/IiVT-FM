@@ -34,96 +34,99 @@ class FileManager(QMainWindow):
         self.ui.actiondelete.triggered.connect(self.pbn_delete)
         self.ui.actionAbout_FileManager.triggered.connect(self.about)
 
-        self.currentPath = ''
-        self.commandString = ''
-        self.isDirectory = True
+        self.current_path = ''
+        self.command_string = ''
+        self.is_dir = True
 
     def on_tree_clicked(self, index):
-        self.currentPath = self.model.filePath(index).replace('/', '\\')
-        self.isDirectory = self.model.isDir(index)
+        self.current_path = self.model.filePath(index).replace('/', '\\')
+        self.is_dir = self.model.isDir(index)
 
 
 
     def pbn_cut(self):
-        self.commandString = 'move /y "' + self.currentPath + '"'
+        self.command_string = 'move /y "' + self.current_path + '"'
 
     def pbn_copy(self):
-        if self.isDirectory:
-            self.commandString = 'xcopy /e /s /y "' + self.currentPath + '"'
+        if self.is_dir:
+            self.command_string = 'xcopy /e /s /y "' + self.current_path + '"'
         else:
-            self.commandString = 'copy /y "' + self.currentPath + '"'
-        print(self.commandString)
+            self.command_string = 'copy /y "' + self.current_path + '"'
+        print(self.command_string)
 
     def pbn_paste(self):
-        if self.commandString != '':
+        if self.command_string != '':
             try:
-                if self.isDirectory:
-                    self.commandString += ' "' + self.currentPath + '"'
+                if self.is_dir:
+                    self.command_string += ' "' + self.current_path + '"'
                 else:
-                    self.commandString += ' "' + '\\'.join(self.currentPath.split('\\')[:-1]) + '"'
-                print(self.commandString)
-                os.system(self.commandString)
-                self.commandString = ''
+                    self.command_string += ' "' + '\\'.join(self.current_path.split('\\')[:-1]) + '"'
+                print(self.command_string)
+                os.system(self.command_string)
+                self.command_string = ''
             except Exception as e:
                 QMessageBox.about(self, 'Оповещение', e.__str__())
 
     def pbn_delete(self):
-        print('del /s /y "' + self.currentPath + '"')
+        print('del /s /y "' + self.current_path + '"')
         try:
-            os.system('del "' + self.currentPath + '"')
+            os.system('del "' + self.current_path + '"')
         except Exception as e:
             QMessageBox.about(self, 'Оповещение', e.__str__())
 
     def pbn_info(self):
-        fullPath = "Полный путь к файлу: " + self.currentPath + "\n"
-        lastOpen = "Последнее открытие: " + QFileInfo(self.currentPath).lastRead().toString("dd-MM-yyyy HH:mm:ss") + "\n"
-        mLenght = max(len(fullPath), len(lastOpen))
-        if mLenght == len(fullPath):
-            sub = len(fullPath) - len(lastOpen)
-            lastOpen = "Последнее открытие: " + sub * " " + QFileInfo(self.currentPath).lastRead().toString("dd-MM-yyyy HH:mm:ss") + "\n"
+        full_path = "Полный путь к файлу: " + self.current_path + "\n"
+        last_open = "Последнее открытие: " + QFileInfo(self.current_path).lastRead().toString("dd-MM-yyyy HH:mm:ss") + "\n"
+        max_len = max(len(full_path), len(last_open))
+        if max_len == len(full_path):
+            sub = len(full_path) - len(last_open)
+            last_open = "Последнее открытие: " + sub * " " + QFileInfo(self.current_path).lastRead().toString("dd-MM-yyyy HH:mm:ss") + "\n"
         else:
-            sub = len(lastOpen) - len(fullPath)
-            fullPath = "Полный путь к файлу: " + sub * " " + self.currentPath + "\n"
+            sub = len(last_open) - len(full_path)
+            full_path = "Полный путь к файлу: " + sub * " " + self.current_path + "\n"
 
-        lenFileSize = len("Размер файла :" + f"{QFileInfo(self.currentPath).size() / 1024:.3f} kByte" + "\n")
-        fileSize = "Размер файла :" + (mLenght - lenFileSize) * " " + f"{QFileInfo(self.currentPath).size() / 1024:.3f} kByte" + "\n"
-        lenSuffix = len(str(QFileInfo(self.currentPath).suffix())) + 12
-        if QFileInfo(self.currentPath).isExecutable():
-            isEx = "Да"
-            lenEx = 16
+        len_file_size = len("Размер файла :" + f"{QFileInfo(self.current_path).size() / 1024:.3f} kByte" + "\n")
+        file_size = "Размер файла :" + (max_len - len_file_size) * " " + f"{QFileInfo(self.current_path).size() / 1024:.3f} kByte" + "\n"
+        len_suffix = len(str(QFileInfo(self.current_path).suffix())) + 12
+        if QFileInfo(self.current_path).isExecutable():
+            is_ex = "Да"
+            len_ex = 16
         else:
-            isEx = "Нет"
-            lenEx = 17
+            is_ex = "Нет"
+            len_ex = 17
 
-        if QFileInfo(self.currentPath).isHidden():
-            isHide = "Да"
-            lenHide = 12
+        if QFileInfo(self.current_path).isHidden():
+            is_hide = "Да"
+            len_hide = 12
         else:
-            isHide = "Нет"
-            lenHide = 13
+            is_hide = "Нет"
+            len_hide = 13
 
-        if not QFileInfo(self.currentPath).isWritable():
-            isNotRead = "Да"
-            lenNotRead = 22
+        if not QFileInfo(self.current_path).isWritable():
+            is_not_read = "Да"
+            len_not_read = 22
         else:
-            isNotRead = "Нет"
-            lenNotRead = 23
+            is_not_read = "Нет"
+            len_not_read = 23
 
-        if self.currentPath != '':
-            msgText = "Создание: " + (mLenght - 30) * " " + QFileInfo(self.currentPath).created().toString("dd-MM-yyyy HH:mm:ss") + "\n"
-            msgText += "Изменение: " + (mLenght - 31) * " " + QFileInfo(self.currentPath).lastModified().toString("dd-MM-yyyy HH:mm:ss") + "\n"
-            msgText += lastOpen
-            msgText += fileSize
-            msgText += fullPath
-            msgText += "Тип файла: " + (mLenght - lenSuffix) * " " + QFileInfo(self.currentPath).suffix() + "\n"
-            msgText += "Исполняемый: " + (mLenght - lenEx) * " " + isEx + "\n"
-            msgText += "Скрытый: " + (mLenght - lenHide) * " " + isHide + "\n"
-            msgText += "Только для чтения: " + (mLenght - lenNotRead) * " " + isNotRead
+        if self.current_path != '':
+            msg_text = "Создание: " + (max_len - 30) * " " + QFileInfo(self.current_path).created().toString("dd-MM-yyyy HH:mm:ss") + "\n"
+            msg_text += "Изменение: " + (max_len - 31) * " " + QFileInfo(self.current_path).lastModified().toString("dd-MM-yyyy HH:mm:ss") + "\n"
+            msg_text += last_open
+            msg_text += file_size
+            msg_text += full_path
+            if self.is_dir:
+                msg_text += "Тип файла: " + (max_len - 15) * " " + "dir\n"
+            else:
+                msg_text += "Тип файла: " + (max_len - len_suffix) * " " + QFileInfo(self.current_path).suffix() + "\n"
+            msg_text += "Исполняемый: " + (max_len - len_ex) * " " + is_ex + "\n"
+            msg_text += "Скрытый: " + (max_len - len_hide) * " " + is_hide + "\n"
+            msg_text += "Только для чтения: " + (max_len - len_not_read) * " " + is_not_read
         else:
-            msgText = "Файл не выбран."
+            msg_text = "Файл не выбран."
         msg = QMessageBox()
         msg.setWindowTitle("Информация о файле")
-        msg.setText(msgText)
+        msg.setText(msg_text)
         msg.setIcon(QMessageBox.Information)
         msg.setStyleSheet(
             """
@@ -168,7 +171,7 @@ class FileManager(QMainWindow):
             self.pbn_paste()
         elif event.key() == 88:
             self.pbn_cut()
-        elif event.key() == 16777272 or event.key() == 81:
+        elif event.key() == 16777272 or event.key() == 16777223 or event.key() == 81:
             self.pbn_delete()
         elif event.key() == 16777264:
             self.about()
