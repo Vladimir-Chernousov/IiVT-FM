@@ -48,7 +48,10 @@ class FileManager(QMainWindow):
         self.commandString = 'move /y "' + self.currentPath + '"'
 
     def pbn_copy(self):
-        self.commandString = 'xcopy /e /s /y "' + self.currentPath + '"'
+        if self.isDirectory:
+            self.commandString = 'xcopy /e /s /y "' + self.currentPath + '"'
+        else:
+            self.commandString = 'copy /y "' + self.currentPath + '"'
         print(self.commandString)
 
     def pbn_paste(self):
