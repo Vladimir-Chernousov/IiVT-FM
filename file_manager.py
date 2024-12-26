@@ -2,7 +2,7 @@ import sys
 import os
 from collections import deque
 from PyQt5.QtCore import QDir, QFileInfo
-from PyQt5.QtWidgets import QApplication, QFileSystemModel, QTreeView, QMainWindow, QMenu
+from PyQt5.QtWidgets import QApplication, QFileSystemModel, QTreeView, QMainWindow, QMenu, QMessageBox
 
 import main_window_disigne
 
@@ -76,15 +76,24 @@ class FileManager(QMainWindow):
 
     def pbn_info(self):
         print('pbn_info')
-        print("Создание:", QFileInfo(self.currentPath).created())
-        print("Изменеие:", QFileInfo(self.currentPath).lastModified())
-        print("Последнее открытие:", QFileInfo(self.currentPath).lastRead())
-        print("Размер файла:", QFileInfo(self.currentPath).size() / 1024)
-        print("Полный путь к файлу:", self.currentPath)
-        print("Тип файла:", QFileInfo(self.currentPath).suffix())
-        print("Исполняемый:", QFileInfo(self.currentPath).isExecutable())
-        print("Скрытый:", QFileInfo(self.currentPath).isHidden())
-        print("Только для чтения:", not QFileInfo(self.currentPath).isWritable())
+        if self.currentPath != '':
+            msgText = "Создание: " + QFileInfo(self.currentPath).created().toString("dd-MM-yyyy HH:mm:ss") + "\n"
+            msgText += "Изменеие: " + QFileInfo(self.currentPath).lastModified().toString("dd-MM-yyyy HH:mm:ss") + "\n"
+            msgText += "Последнее открытие: " + QFileInfo(self.currentPath).lastRead().toString("dd-MM-yyyy HH:mm:ss") + "\n"
+            msgText += f"Размер файла : {QFileInfo(self.currentPath).size() / 1024:.3f} kByte" + "\n"
+            msgText += "Полный путь к файлу: " + self.currentPath + "\n"
+            msgText += "Тип файла: ." + QFileInfo(self.currentPath).suffix() + "\n"
+            msgText += "Исполняемый: " + str(QFileInfo(self.currentPath).isExecutable()) + "\n"
+            msgText += "Скрытый: " + str(QFileInfo(self.currentPath).isHidden()) + "\n"
+            msgText += "Только для чтения: " + str(not QFileInfo(self.currentPath).isWritable())
+        else:
+            msgText = "Файл не выбран."
+        msg = QMessageBox()
+        msg.setWindowTitle("Информация о файле")
+        msg.setText(msgText)
+        msg.setIcon(QMessageBox.Information)
+        msg.exec_()
+
 
 
     def about(self):
