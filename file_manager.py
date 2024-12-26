@@ -88,6 +88,27 @@ class FileManager(QMainWindow):
 
         lenFileSize = len("Размер файла :" + f"{QFileInfo(self.currentPath).size() / 1024:.3f} kByte" + "\n")
         fileSize = "Размер файла :" + (mLenght - lenFileSize) * " " + f"{QFileInfo(self.currentPath).size() / 1024:.3f} kByte" + "\n"
+        lenSuffix = len(str(QFileInfo(self.currentPath).suffix())) + 12
+        if QFileInfo(self.currentPath).isExecutable():
+            isEx = "Да"
+            lenEx = 16
+        else:
+            isEx = "Нет"
+            lenEx = 17
+
+        if QFileInfo(self.currentPath).isHidden():
+            isHide = "Да"
+            lenHide = 12
+        else:
+            isHide = "Нет"
+            lenHide = 13
+
+        if not QFileInfo(self.currentPath).isWritable():
+            isNotRead = "Да"
+            lenNotRead = 22
+        else:
+            isNotRead = "Нет"
+            lenNotRead = 23
 
         if self.currentPath != '':
             msgText = "Создание: " + (mLenght - 30) * " " + QFileInfo(self.currentPath).created().toString("dd-MM-yyyy HH:mm:ss") + "\n"
@@ -95,10 +116,10 @@ class FileManager(QMainWindow):
             msgText += lastOpen
             msgText += fileSize
             msgText += fullPath
-            msgText += "Тип файла: ." + QFileInfo(self.currentPath).suffix() + "\n"
-            msgText += "Исполняемый: " + str(QFileInfo(self.currentPath).isExecutable()) + "\n"
-            msgText += "Скрытый: " + str(QFileInfo(self.currentPath).isHidden()) + "\n"
-            msgText += "Только для чтения: " + str(not QFileInfo(self.currentPath).isWritable())
+            msgText += "Тип файла: " + (mLenght - lenSuffix) * " " + QFileInfo(self.currentPath).suffix() + "\n"
+            msgText += "Исполняемый: " + (mLenght - lenEx) * " " + isEx + "\n"
+            msgText += "Скрытый: " + (mLenght - lenHide) * " " + isHide + "\n"
+            msgText += "Только для чтения: " + (mLenght - lenNotRead) * " " + isNotRead
         else:
             msgText = "Файл не выбран."
         msg = QMessageBox()
