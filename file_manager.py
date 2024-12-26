@@ -1,7 +1,7 @@
 import sys
 import os
 from collections import deque
-from PyQt5.QtCore import QDir, QModelIndex
+from PyQt5.QtCore import QDir, QFileInfo
 from PyQt5.QtWidgets import QApplication, QFileSystemModel, QTreeView, QMainWindow, QMenu
 
 import main_window_disigne
@@ -75,6 +75,16 @@ class FileManager(QMainWindow):
 
     def pbn_info(self):
         print('pbn_info')
+        print("Создание:", QFileInfo(self.currentPath).created())
+        print("Изменеие:", QFileInfo(self.currentPath).lastModified())
+        print("Последнее открытие:", QFileInfo(self.currentPath).lastRead())
+        print("Размер файла:", QFileInfo(self.currentPath).size() / 1024)
+        print("Полный путь к файлу:", self.currentPath)
+        print("Тип файла:", QFileInfo(self.currentPath).suffix())
+        print("Исполняемый:", QFileInfo(self.currentPath).isExecutable())
+        print("Скрытый:", QFileInfo(self.currentPath).isHidden())
+        print("Только для чтения:", not QFileInfo(self.currentPath).isWritable())
+
 
     def about(self):
         print('about')
