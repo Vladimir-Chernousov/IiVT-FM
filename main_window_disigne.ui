@@ -240,6 +240,7 @@
     <addaction name="actionDispetcher"/>
     <addaction name="actionCmd"/>
     <addaction name="actionParametrs"/>
+    <addaction name="actionRedgedit"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuOption"/>
@@ -338,6 +339,11 @@
   <action name="actionParametrs">
    <property name="text">
     <string>Параметры системы</string>
+   </property>
+  </action>
+  <action name="actionRedgedit">
+   <property name="text">
+    <string>Редактор реестра</string>
    </property>
   </action>
  </widget>
