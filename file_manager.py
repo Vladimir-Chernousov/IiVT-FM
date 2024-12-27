@@ -259,7 +259,7 @@ class FileManager(QMainWindow):
 
         action = contextMenu.exec_(self.mapToGlobal(event.pos()))
 
-        if action == quit:
+        if action == sys.exit:
             self.close()
         elif action == copyAction:
             self.pbn_copy()
