@@ -27,7 +27,7 @@ class FileManager(QMainWindow):
 
         self.ui.tree.setModel(self.model)
         self.ui.tree.setSelectionMode(QTreeView.ExtendedSelection)
-        self.ui.tree.header().setSectionResizeMode(0, QHeaderView.Stretch)
+        self.ui.tree.setColumnWidth(0,440)
 
         self.ui.pbn_cut.clicked.connect(self.pbn_cut)
         self.ui.pbn_copy.clicked.connect(self.pbn_copy)
@@ -56,8 +56,9 @@ class FileManager(QMainWindow):
         self.is_dir = True
 
     def on_tree_clicked(self, index):
-        self.current_path = self.model.filePath(index).replace('/', '\\')
-        self.is_dir = self.model.isDir(index)
+        if self.model.filePath(index) != '':
+            self.current_path = self.model.filePath(index).replace('/', '\\')
+            self.is_dir = self.model.isDir(index)
 
     def choose_box(self):
         if self.ui.checkBox.isChecked():
@@ -100,19 +101,31 @@ class FileManager(QMainWindow):
         if self.current_path == '':
             QMessageBox.about(self, 'Оповещение', 'Ничего не выбрано')
             return None
-        try:
-            result = QMessageBox.question(self, 'Оповещение', f'Вы действительно хотите удалить:'
+        if not self.is_dir:
+            result = QMessageBox.question(self, 'Оповещение', f'Вы действительно хотите удалить файл:'
                                                               f' {self.current_path}',
                                           QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
             if result == QMessageBox.Yes:
-                os.system('del "' + self.current_path + '"')
-                QMessageBox.about(self, 'Оповещение', 'Файл удалён')
-            else:
-                QMessageBox.about(self, 'Оповещение', 'Файл не удалён')
-        except Exception as e:
-            QMessageBox.about(self, 'Оповещение', e.__str__())
+                try:
+                    os.system('del /q /s "' + self.current_path + '"')
+                    self.current_path = '\\'.join(self.current_path.split('\\')[:-1])
+                except Exception as e:
+                    QMessageBox.about(self, 'Оповещение', e.__str__())
+        else:
+            result = QMessageBox.question(self, 'Оповещение', f'Вы действительно хотите удалить всё содержиое папки:'
+                                                          f' {self.current_path}',
+                                      QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+            if result == QMessageBox.Yes:
+                try:
+                    os.system('rmdir /q /s "' + self.current_path + '"')
+                    self.current_path = '\\'.join(self.current_path.split('\\')[:-1])
+                except Exception as e:
+                    QMessageBox.about(self, 'Оповещение', e.__str__())
 
     def pbn_info(self):
+        if self.current_path == '':
+            QMessageBox.about(self, 'Оповещение', 'Ничего не выбрано')
+            return None
         full_path = "Полный путь к файлу: " + self.current_path + "\n"
         last_open = "Последнее открытие: " + QFileInfo(self.current_path).lastRead().toString("dd-MM-yyyy HH:mm:ss") + "\n"
         max_len = max(len(full_path), len(last_open))
@@ -147,21 +160,18 @@ class FileManager(QMainWindow):
             is_not_read = "Нет"
             len_not_read = 23
 
-        if self.current_path != '':
-            msg_text = "Создание: " + (max_len - 30) * " " + QFileInfo(self.current_path).created().toString("dd-MM-yyyy HH:mm:ss") + "\n"
-            msg_text += "Изменение: " + (max_len - 31) * " " + QFileInfo(self.current_path).lastModified().toString("dd-MM-yyyy HH:mm:ss") + "\n"
-            msg_text += last_open
-            msg_text += file_size
-            msg_text += full_path
-            if self.is_dir:
-                msg_text += "Тип файла: " + (max_len - 15) * " " + "dir\n"
-            else:
-                msg_text += "Тип файла: " + (max_len - len_suffix) * " " + QFileInfo(self.current_path).suffix() + "\n"
-            msg_text += "Исполняемый: " + (max_len - len_ex) * " " + is_ex + "\n"
-            msg_text += "Скрытый: " + (max_len - len_hide) * " " + is_hide + "\n"
-            msg_text += "Только для чтения: " + (max_len - len_not_read) * " " + is_not_read
+        msg_text = "Создание: " + (max_len - 30) * " " + QFileInfo(self.current_path).created().toString("dd-MM-yyyy HH:mm:ss") + "\n"
+        msg_text += "Изменение: " + (max_len - 31) * " " + QFileInfo(self.current_path).lastModified().toString("dd-MM-yyyy HH:mm:ss") + "\n"
+        msg_text += last_open
+        msg_text += file_size
+        msg_text += full_path
+        if self.is_dir:
+            msg_text += "Тип файла: " + (max_len - 15) * " " + "dir\n"
         else:
-            msg_text = "Файл не выбран."
+            msg_text += "Тип файла: " + (max_len - len_suffix) * " " + QFileInfo(self.current_path).suffix() + "\n"
+        msg_text += "Исполняемый: " + (max_len - len_ex) * " " + is_ex + "\n"
+        msg_text += "Скрытый: " + (max_len - len_hide) * " " + is_hide + "\n"
+        msg_text += "Только для чтения: " + (max_len - len_not_read) * " " + is_not_read
         msg = QMessageBox()
         msg.setWindowTitle("Информация о файле")
         msg.setText(msg_text)
@@ -183,32 +193,41 @@ class FileManager(QMainWindow):
             webbrowser.open("about.html")
 
     def new_folder(self):
+        if self.current_path == '':
+            QMessageBox.about(self, 'Оповещение', 'Не выбрана директория')
+            return None
         text, status = QInputDialog.getText(self, 'Новая папка', 'Введите имя:')
         if status:
             print(text)
-        if self.is_dir:
-            try:
-                os.system('mkdir "' + self.current_path + '\\' + 'Hello' + '"')
-            except Exception as e:
-                QMessageBox.about(self, 'Оповещение', e.__str__())
-        else:
-            try:
-                os.system('mkdir "' + '\\'.join(self.current_path.split('\\')[:-1]) + '\\' + 'Hello' + '"')
-            except Exception as e:
-                QMessageBox.about(self, 'Оповещение', e.__str__())
+            if self.is_dir:
+                try:
+                    os.system('mkdir "' + self.current_path + '\\' + text + '"')
+                except Exception as e:
+                    QMessageBox.about(self, 'Оповещение', e.__str__())
+            else:
+                try:
+                    os.system('mkdir "' + '\\'.join(self.current_path.split('\\')[:-1]) + '\\' + text + '"')
+                except Exception as e:
+                    QMessageBox.about(self, 'Оповещение', e.__str__())
 
 
     def rename(self):
-        try:
-            text, status = QInputDialog.getText(self, 'Переименование', 'Введите новое имя:')
-            if status:
-                print(text)
-                #os.system('rename "' + self.current_path +'" Hello.txt')
-        except Exception as e:
-            QMessageBox.about(self, 'Оповещение', e.__str__())
+        if self.current_path == '':
+            QMessageBox.about(self, 'Оповещение', 'Ничего не выбрано')
+            return None
+        text, status = QInputDialog.getText(self, 'Переименование', 'Введите новое имя:')
+        if status:
+            print(text)
+            try:
+                os.system('rename "' + self.current_path + '" ' + text)
+            except Exception as e:
+                QMessageBox.about(self, 'Оповещение', e.__str__())
 
 
     def open(self):
+        if self.current_path == '':
+            QMessageBox.about(self, 'Оповещение', 'Ничего не выбрано')
+            return None
         if self.current_path != '':
             print ('start "' + self.current_path + '"')
             os.system('start notepad "' + self.current_path + '"')
