@@ -166,10 +166,24 @@ class FileManager(QMainWindow):
             webbrowser.open("about.html")
 
     def new_folder(self):
-        pass
+        if self.is_dir:
+            try:
+                os.system('mkdir "' + self.current_path + '\\' + 'Hello' + '"')
+            except:
+                QMessageBox.about(self, 'Оповещение', e.__str__())
+        else:
+            try:
+                os.system('mkdir "' + '\\'.join(self.current_path.split('\\')[:-1]) + '\\' + 'Hello' + '"')
+            except:
+                QMessageBox.about(self, 'Оповещение', e.__str__())
+
 
     def rename(self):
-        pass
+        try:
+            os.system('rename "' + self.current_path +'" Hello.txt')
+        except:
+            QMessageBox.about(self, 'Оповещение', e.__str__())
+
 
     def open(self):
         if self.current_path != '':
