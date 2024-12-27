@@ -259,7 +259,7 @@ class FileManager(QMainWindow):
 
         action = contextMenu.exec_(self.mapToGlobal(event.pos()))
 
-        if action == quit:
+        if action == sys.exit:
             self.close()
         elif action == copyAction:
             self.pbn_copy()
@@ -279,17 +279,17 @@ class FileManager(QMainWindow):
     def keyPressEvent(self, event):
         if event.key() == 67 or event.key() == 16777268:
             self.pbn_copy()
-        elif event.key() == 86:
+        elif event.key() == 86 or event.key() == 16777269:
             self.pbn_paste()
         elif event.key() == 88:
             self.pbn_cut()
-        elif event.key() == 16777272 or event.key() == 16777223 or event.key() == 81:
+        elif event.key() == 16777271 or event.key() == 16777223 or event.key() == 81:
             self.pbn_delete()
         elif event.key() == 16777264:
             self.about()
         elif event.key() == 16777270:
             self.new_folder()
-        elif event.key() == 16777267 or event.key() == 16777269:
+        elif event.key() == 16777267:
             self.rename()
         event.accept()
 
