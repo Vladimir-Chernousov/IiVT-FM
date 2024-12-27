@@ -6,7 +6,8 @@ from operator import index
 
 import requests
 from PyQt5.QtCore import QDir, QFileInfo
-from PyQt5.QtWidgets import QApplication, QFileSystemModel, QTreeView, QMainWindow, QMenu, QMessageBox, QHeaderView
+from PyQt5.QtWidgets import QApplication, QFileSystemModel, QTreeView, QMainWindow, QMenu, QMessageBox, QHeaderView, \
+    QInputDialog
 from PyQt5.uic.Compiler.qtproxies import QtWidgets
 from urllib3 import HTTPConnectionPool
 
@@ -22,7 +23,7 @@ class FileManager(QMainWindow):
 
         self.model = QFileSystemModel()
         self.model.setRootPath(self.path)
-        self.model.setFilter(QDir.NoFilter)  # Скрытые и системные файлы
+        #self.model.setFilter(QDir.NoFilter)  # Скрытые и системные файлы
 
         self.ui.tree.setModel(self.model)
         self.ui.tree.setSelectionMode(QTreeView.ExtendedSelection)
@@ -100,7 +101,14 @@ class FileManager(QMainWindow):
             QMessageBox.about(self, 'Оповещение', 'Ничего не выбрано')
             return None
         try:
-            os.system('del "' + self.current_path + '"')
+            result = QMessageBox.question(self, 'Оповещение', f'Вы действительно хотите удалить:'
+                                                              f' {self.current_path}',
+                                          QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+            if result == QMessageBox.Yes:
+                os.system('del "' + self.current_path + '"')
+                QMessageBox.about(self, 'Оповещение', 'Файл удалён')
+            else:
+                QMessageBox.about(self, 'Оповещение', 'Файл не удалён')
         except Exception as e:
             QMessageBox.about(self, 'Оповещение', e.__str__())
 
@@ -175,22 +183,28 @@ class FileManager(QMainWindow):
             webbrowser.open("about.html")
 
     def new_folder(self):
+        text, status = QInputDialog.getText(self, 'Новая папка', 'Введите имя:')
+        if status:
+            print(text)
         if self.is_dir:
             try:
                 os.system('mkdir "' + self.current_path + '\\' + 'Hello' + '"')
-            except:
+            except Exception as e:
                 QMessageBox.about(self, 'Оповещение', e.__str__())
         else:
             try:
                 os.system('mkdir "' + '\\'.join(self.current_path.split('\\')[:-1]) + '\\' + 'Hello' + '"')
-            except:
+            except Exception as e:
                 QMessageBox.about(self, 'Оповещение', e.__str__())
 
 
     def rename(self):
         try:
-            os.system('rename "' + self.current_path +'" Hello.txt')
-        except:
+            text, status = QInputDialog.getText(self, 'Переименование', 'Введите новое имя:')
+            if status:
+                print(text)
+                #os.system('rename "' + self.current_path +'" Hello.txt')
+        except Exception as e:
             QMessageBox.about(self, 'Оповещение', e.__str__())
 
 
@@ -262,6 +276,10 @@ class FileManager(QMainWindow):
             self.pbn_delete()
         elif event.key() == 16777264:
             self.about()
+        elif event.key() == 16777270:
+            self.new_folder()
+        elif event.key() == 16777267 or event.key() == 16777269:
+            self.rename()
         event.accept()
 
 
