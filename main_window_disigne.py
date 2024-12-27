@@ -119,6 +119,8 @@ class Ui_MainWindow(object):
         self.actionCmd.setObjectName("actionCmd")
         self.actionParametrs = QtWidgets.QAction(MainWindow)
         self.actionParametrs.setObjectName("actionParametrs")
+        self.actionRedgedit = QtWidgets.QAction(MainWindow)
+        self.actionRedgedit.setObjectName("actionRedgedit")
         self.menuFile.addAction(self.actioninfo)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actioncopy_2)
@@ -134,6 +136,7 @@ class Ui_MainWindow(object):
         self.menuOption.addAction(self.actionDispetcher)
         self.menuOption.addAction(self.actionCmd)
         self.menuOption.addAction(self.actionParametrs)
+        self.menuOption.addAction(self.actionRedgedit)
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuOption.menuAction())
         self.menubar.addAction(self.menuHelp.menuAction())
@@ -172,6 +175,7 @@ class Ui_MainWindow(object):
         self.actionDispetcher.setText(_translate("MainWindow", "Диспетчер задач"))
         self.actionCmd.setText(_translate("MainWindow", "Командная строка"))
         self.actionParametrs.setText(_translate("MainWindow", "Параметры системы"))
+        self.actionRedgedit.setText(_translate("MainWindow", "Редактор реестра"))
 
 
 if __name__ == "__main__":

@@ -46,6 +46,9 @@ class FileManager(QMainWindow):
         self.ui.actionDispetcher.triggered.connect(self.open_taskmgr)
         self.ui.actionCmd.triggered.connect(self.open_cmd)
         self.ui.actionParametrs.triggered.connect(self.open_parameters)
+        self.ui.actionRedgedit.triggered.connect(self.open_redgedit)
+
+        self.ui.checkBox.clicked.connect(self.choose_box)
 
         self.current_path = ''
         self.command_string = ''
@@ -54,6 +57,12 @@ class FileManager(QMainWindow):
     def on_tree_clicked(self, index):
         self.current_path = self.model.filePath(index).replace('/', '\\')
         self.is_dir = self.model.isDir(index)
+
+    def choose_box(self):
+        if self.ui.checkBox.isChecked():
+            self.model.setFilter(QDir.NoFilter)
+        else:
+            self.model.setFilter(QDir.AllDirs and QDir.Files)
 
     def pbn_cut(self):
         if self.current_path == '':
@@ -207,6 +216,9 @@ class FileManager(QMainWindow):
 
     def open_parameters(self):
         os.system("start msconfig")
+
+    def open_redgedit(self):
+        os.system("start regedit")
 
     def contextMenuEvent(self, event):
         contextMenu = QMenu()
