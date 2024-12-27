@@ -37,9 +37,9 @@ class FileManager(QMainWindow):
         self.ui.actiondelete.triggered.connect(self.pbn_delete)
         self.ui.actionAbout_FileManager.triggered.connect(self.about)
         self.ui.actionPaint.triggered.connect(self.open_paint)
-        self.ui.actionCalk.triggered.connect(self.open_calk)
-        self.ui.actionBlok.triggered.connect(self.open_blok)
-        self.ui.actionDispetcher.triggered.connect(self.open_dispatcher)
+        self.ui.actionCalk.triggered.connect(self.open_calc)
+        self.ui.actionBlok.triggered.connect(self.open_notepad)
+        self.ui.actionDispetcher.triggered.connect(self.open_taskmgr)
         self.ui.actionCmd.triggered.connect(self.open_cmd)
         self.ui.actionParametrs.triggered.connect(self.open_parameters)
 
@@ -168,25 +168,27 @@ class FileManager(QMainWindow):
         pass
 
     def open(self):
-        pass
+        if self.current_path != '':
+            print ('start "' + self.current_path + '"')
+            os.system('start notepad "' + self.current_path + '"')
 
     def open_paint(self):
-        pass
+        os.system("start mspaint")
 
-    def open_calk(self):
-        pass
+    def open_calc(self):
+        os.system("start calc")
 
-    def open_blok(self):
-        pass
+    def open_notepad(self):
+        os.system("start notepad")
 
-    def open_dispatcher(self):
-        pass
+    def open_taskmgr(self):
+        os.system("start taskmgr")
 
     def open_cmd(self):
-        pass
+        os.system("start cmd")
 
     def open_parameters(self):
-        pass
+        os.system("start msconfig")
 
     def contextMenuEvent(self, event):
         contextMenu = QMenu()
