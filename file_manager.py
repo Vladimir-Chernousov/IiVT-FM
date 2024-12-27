@@ -2,9 +2,12 @@ import sys
 import os
 import webbrowser
 from collections import deque
+from operator import index
+
 import requests
 from PyQt5.QtCore import QDir, QFileInfo
-from PyQt5.QtWidgets import QApplication, QFileSystemModel, QTreeView, QMainWindow, QMenu, QMessageBox
+from PyQt5.QtWidgets import QApplication, QFileSystemModel, QTreeView, QMainWindow, QMenu, QMessageBox, QHeaderView
+from PyQt5.uic.Compiler.qtproxies import QtWidgets
 from urllib3 import HTTPConnectionPool
 
 import main_window_disigne
@@ -23,6 +26,7 @@ class FileManager(QMainWindow):
 
         self.ui.tree.setModel(self.model)
         self.ui.tree.setSelectionMode(QTreeView.ExtendedSelection)
+        self.ui.tree.header().setSectionResizeMode(0, QHeaderView.Stretch)
 
         self.ui.pbn_cut.clicked.connect(self.pbn_cut)
         self.ui.pbn_copy.clicked.connect(self.pbn_copy)
