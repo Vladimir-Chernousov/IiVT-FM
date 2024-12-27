@@ -62,9 +62,9 @@ class FileManager(QMainWindow):
 
     def choose_box(self):
         if self.ui.checkBox.isChecked():
-            self.model.setFilter(QDir.NoFilter)
+            self.model.setFilter(QDir.AllDirs | QDir.Files | QDir.Hidden | QDir.NoDot | QDir.NoDotDot)
         else:
-            self.model.setFilter(QDir.AllDirs | QDir.Files)
+            self.model.setFilter(QDir.Dirs | QDir.Files | QDir.NoDot | QDir.NoDotDot)
 
     def pbn_cut(self):
         if self.current_path == '':
