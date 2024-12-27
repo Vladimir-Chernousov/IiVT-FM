@@ -6,10 +6,8 @@ from operator import index
 
 import requests
 from PyQt5.QtCore import QDir, QFileInfo
-from PyQt5.QtWidgets import QApplication, QFileSystemModel, QTreeView, QMainWindow, QMenu, QMessageBox, QHeaderView, \
-    QInputDialog
-from PyQt5.uic.Compiler.qtproxies import QtWidgets
-from urllib3 import HTTPConnectionPool
+from PyQt5.QtWidgets import QApplication, QFileSystemModel, QTreeView, \
+                            QMainWindow, QMenu, QMessageBox, QInputDialog
 
 import main_window_disigne
 
@@ -88,7 +86,6 @@ class FileManager(QMainWindow):
                     self.command_string += ' "' + self.current_path + '"'
                 else:
                     self.command_string += ' "' + '\\'.join(self.current_path.split('\\')[:-1]) + '"'
-                print(self.command_string)
                 os.system(self.command_string)
                 self.command_string = ''
             except Exception as e:
@@ -172,10 +169,9 @@ class FileManager(QMainWindow):
         msg_text += "Исполняемый: " + (max_len - len_ex) * " " + is_ex + "\n"
         msg_text += "Скрытый: " + (max_len - len_hide) * " " + is_hide + "\n"
         msg_text += "Только для чтения: " + (max_len - len_not_read) * " " + is_not_read
-        msg = QMessageBox()
+        msg = QMessageBox(self)
         msg.setWindowTitle("Информация о файле")
         msg.setText(msg_text)
-        msg.setIcon(QMessageBox.Information)
         msg.setStyleSheet(
             """
             QMessageBox {
@@ -198,7 +194,6 @@ class FileManager(QMainWindow):
             return None
         text, status = QInputDialog.getText(self, 'Новая папка', 'Введите имя:')
         if status:
-            print(text)
             if self.is_dir:
                 try:
                     os.system('mkdir "' + self.current_path + '\\' + text + '"')
@@ -217,7 +212,6 @@ class FileManager(QMainWindow):
             return None
         text, status = QInputDialog.getText(self, 'Переименование', 'Введите новое имя:')
         if status:
-            print(text)
             try:
                 os.system('rename "' + self.current_path + '" ' + text)
             except Exception as e:
@@ -229,7 +223,6 @@ class FileManager(QMainWindow):
             QMessageBox.about(self, 'Оповещение', 'Ничего не выбрано')
             return None
         if self.current_path != '':
-            print ('start "' + self.current_path + '"')
             os.system('start notepad "' + self.current_path + '"')
 
     def open_paint(self):
@@ -284,7 +277,6 @@ class FileManager(QMainWindow):
             self.open()
 
     def keyPressEvent(self, event):
-        print(event.key())
         if event.key() == 67 or event.key() == 16777268:
             self.pbn_copy()
         elif event.key() == 86:
