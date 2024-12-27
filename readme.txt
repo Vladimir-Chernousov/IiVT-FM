@@ -42,4 +42,3 @@ Qt Designer: Инструмент для разработки GUI.
 Ягафаров Илья: https://vk.com/id363726633
 Сергей Громов: https://vk.com/scarletflow
 Даниил Горлов: https://vk.com/clown_danyya
-Данил Черных: https://vk.com/fx8320eee
