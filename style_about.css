@@ -85,7 +85,7 @@ ul, ol {
 .section ul li::before, .section ol li::before {
     content: '';
     position: absolute;
-    top: 50%;
+    top: 0.8em;
     left: 0;
     transform: translateY(-50%);
     width: 8px; /* Размер маркера */
