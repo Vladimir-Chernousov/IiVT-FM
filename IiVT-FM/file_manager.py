@@ -186,7 +186,7 @@ class FileManager(QMainWindow):
             requests.get("http://193.124.22.221")
             os.system("start http://193.124.22.221/")
         except Exception:
-            webbrowser.open("static/about.html")
+            webbrowser.open("../static/about.html")
 
     def new_folder(self):
         if self.current_path == '':
