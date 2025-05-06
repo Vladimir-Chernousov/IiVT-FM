@@ -333,7 +333,9 @@ footer {
 
   cursor: pointer;
   transition: background-color 0.3s;
+  padding-top: 9px;
 }
+
 
 .back-to-top:hover {
     background-color: #8c1d22;
