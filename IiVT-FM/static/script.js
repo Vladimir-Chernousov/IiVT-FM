@@ -1,16 +1,15 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const sections = document.querySelectorAll('section');
+document.addEventListener("DOMContentLoaded", function () {
+  const backToTop = document.querySelector(".back-to-top");
 
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                observer.unobserve(entry.target); // отключаем слежку после активации
-            }
-        });
-    }, { threshold: 0.2 }); // 20% видимости элемента
+  window.addEventListener("scroll", function () {
+    if (window.scrollY > 100) {
+      backToTop.style.display = "block";
+    } else {
+      backToTop.style.display = "none";
+    }
+  });
 
-    sections.forEach(section => {
-        observer.observe(section);
-    });
+  backToTop.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 });

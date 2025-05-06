@@ -1,3 +1,356 @@
+style_about.css:
+/* Подключение шрифтов */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap');
+
+/* Общие стили */
+body {
+    font-family: 'Open Sans', sans-serif;
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+    color: white;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    overflow-x: hidden; /* Скрываем горизонтальную прокрутку */
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+ul, ol {
+    padding-left: 20px;
+}
+
+/* Стили для заголовка и описания проекта */
+.project-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.project-header h1 {
+    font-size: 3rem;
+    letter-spacing: 1px;
+    animation: fadeInDown 1s ease-out;
+}
+
+.project-header p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    animation: fadeIn 1.2s ease-out;
+}
+
+
+/* Стили для блоков особенностей, технологий, установки и структуры */
+.section {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.section h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 0.5rem;
+}
+
+.section ul, .section ol {
+    list-style: none;
+    padding: 0;
+}
+
+.section ul li, .section ol li {
+    margin-bottom: 0.8rem;
+    position: relative;
+    padding-left: 1.5em; /* Для отступа слева */
+}
+
+.section ul li::before, .section ol li::before {
+    content: '';
+    position: absolute;
+    top: 0.8em;
+    left: 0;
+    transform: translateY(-50%);
+    width: 8px; /* Размер маркера */
+    height: 8px; /* Размер маркера */
+    border-radius: 50%;
+    background-color: #f0c418; /* Цвет маркера */
+}
+
+.section ol li::before{
+    content: counter(list-item);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #f0c418;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    padding-top: 2px;
+}
+.section ol{
+    counter-reset: list-item;
+}
+
+.section ol li{
+    counter-increment: list-item;
+}
+.section a {
+    color: #64dd17;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.section a:hover {
+    color: #fff;
+}
+
+/* Стили для подзаголовков разделов */
+.subsection {
+    margin-bottom: 2rem;
+}
+
+.subsection h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 0.3rem;
+}
+
+.authors {
+    text-align: center;
+    margin: 3rem auto;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    max-width: 800px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.authors:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.authors h3 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    color: #f0c418;
+    position: relative;
+    display: block;
+    text-align: center;
+    width: 100%;
+}
+
+.authors h3::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: #f0c418;
+    border-radius: 3px;
+}
+
+.authors ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem 3rem;
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    text-align: left;
+    width: fit-content;
+}
+
+.authors li {
+    padding: 0.5rem 1rem 0.5rem 1.5rem;
+    position: relative;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.authors li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background: #f0c418;
+    border-radius: 50%;
+}
+
+.authors li:hover {
+    transform: translateX(10px);
+    color: #f0c418;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .authors {
+        padding: 1.5rem;
+        margin: 2rem auto;
+    }
+
+    .authors h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .authors ul {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        text-align: center;
+    }
+
+    .authors li {
+        padding: 0.5rem 0 0.5rem 1.5rem;
+        text-align: left;
+        display: block;
+    }
+
+    .authors li::before {
+        left: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .authors {
+        padding: 1rem;
+    }
+
+    .authors h3 {
+        font-size: 1.3rem;
+    }
+
+    .authors li {
+        font-size: 1rem;
+    }
+}
+
+/* Стили для подвала */
+footer {
+    text-align: center;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 3rem;
+}
+
+/* Анимации */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+    .project-header h1 {
+        font-size: 2.5rem;
+    }
+    .project-header p {
+        font-size: 1rem;
+    }
+    .section {
+        padding: 1.5rem;
+    }
+    .section h2 {
+        font-size: 1.8rem;
+    }
+}
+
+footer {
+    position: relative;
+    text-align: center;
+    padding: 2rem 0 3rem; /* Увеличиваем нижний padding для кнопки */
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 3rem;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.back-to-top {
+    position: absolute;
+    top: -30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #a92227;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    transition: all 0.3s ease;
+    opacity: 1 !important;
+}
+
+.back-to-top:hover {
+    background-color: #8c1d22;
+    transform: scale(1.1);
+}
+
+/* Мобильная версия */
+@media (max-width: 768px) {
+    .back-to-top {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+        top: -25px;
+        right: 20px;
+    }
+}
+
+
+about.html:
 
         <!DOCTYPE html>
     <html lang="en">
@@ -159,3 +512,44 @@ file_manager/
     </footer>
     </body>
     </html>
+
+
+
+script.js:
+document.addEventListener('DOMContentLoaded', function() {
+    // Создаем и добавляем кнопку
+    const backToTopBtn = document.createElement('div');
+    backToTopBtn.className = 'back-to-top';
+    backToTopBtn.innerHTML = '↑';
+    document.body.appendChild(backToTopBtn);
+
+    // Обработчик клика с проверками
+    backToTopBtn.addEventListener('click', function(e) {
+        console.log('Кнопка нажата!'); // Для отладки
+        e.preventDefault();
+
+        // Проверяем поддержку smooth scroll
+        if ('scrollBehavior' in document.documentElement.style) {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        } else {
+            // Фолбэк для старых браузеров
+            window.scrollTo(0, 0);
+        }
+    });
+
+    // Анимация секций (оставлю ваш код)
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    sections.forEach(section => observer.observe(section));
+});
