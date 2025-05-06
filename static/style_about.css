@@ -69,6 +69,11 @@ ul, ol {
     margin-bottom: 1.5rem;
     border-bottom: 2px solid rgba(255, 255, 255, 0.3);
     padding-bottom: 0.5rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 100%;
 }
 
 .section ul, .section ol {
@@ -351,4 +356,15 @@ footer {
         top: -25px;
         right: 20px;
     }
+}
+
+/* Стили для ссылок авторов с классом */
+.author-link {
+    color: inherit !important;
+    text-decoration: none !important;
+    transition: color 0.3s ease;
+}
+
+.author-link:hover {
+    color: #f0c418 !important;
 }
