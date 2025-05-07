@@ -60,9 +60,9 @@
             </ul>
         </section>
 
-        <section class="section">
-            <h2>Структура проекта</h2>
-            <pre>
+        <section class="section mobile-only">
+    <h2>Структура проекта</h2>
+    <pre>
 file_manager/
 ├── .gitignore
 │     # Игнорируемые файлы git
@@ -96,13 +96,35 @@ file_manager/
 │     # Документация программы
 ├── README.md
 │     # Этот файл
-            </pre>
-            <h2>Запуск программы:</h2>
-            <p>Чтобы запустить файловый менеджер, выполните следующую команду в терминале, находясь в папке проекта:
-              <strong><em>python main.py</em></strong>
-               Или запустите <strong><em>.exe</em></strong> файл
+    </pre>
+    <h2>Запуск программы:</h2>
+    <p>Чтобы запустить файловый менеджер, выполните следующую команду в терминале, находясь в папке проекта:
+        <strong><em>python main.py</em></strong>
+        Или запустите <strong><em>.exe</em></strong> файл
     </p>
-        </section>
+    </section>
+
+    <section class="section desktop-only">
+        <pre>
+file_manager/
+├── .gitignore                  # Игнорируемые файлы git
+├── about.html                  # разметка файла информации
+├── style_about.css             # стили для html
+├── script.js                   # скрипт для html
+├── file_manager.py             # Основной скрипт приложения
+├── main.py                     # Скрипт запуска программы
+├── main_window_disigne.py      # Дизайн основного окна программы
+├── main_window_disigne.ui      # UI-файл из Qt Designer
+├── requirements.txt            # Список нужных библиотек
+├── welcome_widget.py           # Приветствие с пользователем
+├── icon.png                    # Иконка программы в расширении png
+├── favicon.ico                 # Готовая иконка программы
+├── file_manager.ui             # UI-файл, сгенерированный Qt Designer
+├── readme.txt                  # Информация о проекте
+├── Документация.docx           # Документация программы
+└── README.md                   # Этот файл
+        </pre>
+    </section>
 
         <div class="subsection">
             <h3>Как использовать</h3>

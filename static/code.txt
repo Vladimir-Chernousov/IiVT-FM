@@ -553,3 +553,55 @@ document.addEventListener('DOMContentLoaded', function() {
 
     sections.forEach(section => observer.observe(section));
 });
+
+file_manager/
+├── .gitignore
+│     # Игнорируемые файлы git
+├── about.html
+│     # разметка файла информации
+├── style_about.css
+│     # стили для html
+├── script.js
+│     # скрипт для html
+├── file_manager.py
+│     # Основной скрипт приложения
+├── main.py
+│     # Скрипт запуска программы
+├── main_window_disigne.py
+│     # Дизайн основного окна программы
+├── main_window_disigne.ui
+│     # UI-файл из Qt Designer
+├── requirements.txt
+│     # Список нужных библиотек
+├── welcome_widget.py
+│     # Приветствие с пользователем
+├── icon.png
+│     # Иконка программы в расширении png
+├── favicon.ico
+│     # Готовая иконка программы
+├── file_manager.ui
+│     # UI-файл, сгенерированный Qt Designer
+├── readme.txt
+│     # Информация о проекте
+├── Документация.docx
+│     # Документация программы
+├── README.md
+│     # Этот файл
+
+file_manager/
+├── .gitignore                  # Игнорируемые файлы git
+├── about.html                  # разметка файла информации
+├── style_about.css             # стили для html
+├── script.js                   # скрипт для html
+├── file_manager.py             # Основной скрипт приложения
+├── main.py                     # Скрипт запуска программы
+├── main_window_disigne.py      # Дизайн основного окна программы
+├── main_window_disigne.ui      # UI-файл из Qt Designer
+├── requirements.txt            # Список нужных библиотек
+├── welcome_widget.py           # Приветствие с пользователем
+├── icon.png                    # Иконка программы в расширении png
+├── favicon.ico                 # Готовая иконка программы
+├── file_manager.ui             # UI-файл, сгенерированный Qt Designer
+├── readme.txt                  # Информация о проекте
+├── Документация.docx           # Документация программы
+└── README.md                   # Этот файл

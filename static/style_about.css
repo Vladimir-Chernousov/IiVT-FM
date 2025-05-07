@@ -116,18 +116,21 @@ ul, ol {
     width: 100%;
 }
 
-.section ul, .section ol {
+.section ul,
+.section ol {
     list-style: none;
     padding: 0;
 }
 
-.section ul li, .section ol li {
+.section ul li,
+.section ol li {
     margin-bottom: 0.8rem;
     position: relative;
     padding-left: 1.5em; /* Для отступа слева */
 }
 
-.section ul li::before, .section ol li::before {
+.section ul li::before,
+.section ol li::before {
     content: '';
     position: absolute;
     top: 0.8em;
@@ -139,7 +142,7 @@ ul, ol {
     background-color: #f0c418; /* Цвет маркера */
 }
 
-.section ol li::before{
+.section ol li::before {
     content: counter(list-item);
     position: absolute;
     left: 0;
@@ -155,13 +158,15 @@ ul, ol {
     border-radius: 50%;
     padding-top: 2px;
 }
-.section ol{
+
+.section ol {
     counter-reset: list-item;
 }
 
-.section ol li{
+.section ol li {
     counter-increment: list-item;
 }
+
 .section a {
     color: #64dd17;
     text-decoration: none;
@@ -170,6 +175,81 @@ ul, ol {
 
 .section a:hover {
     color: #fff;
+}
+
+/* Стили для подзаголовков разделов */
+.subsection {
+    margin-bottom: 2rem;
+}
+
+.subsection h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 0.3rem;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+
+    .project-header h1 {
+        font-size: 2.5rem;
+    }
+
+    .project-header p {
+        font-size: 1rem;
+    }
+
+    .section {
+        padding: 1.5rem;
+    }
+
+    .section h2 {
+        font-size: 1.8rem;
+    }
+
+    /* Только мобильная версия видна */
+    .mobile-only {
+        display: block;
+    }
+
+    .desktop-only {
+        display: none;
+    }
+
+    /* Делаем <pre> читабельным на мобильных */
+    .mobile-only pre {
+        white-space: pre-wrap;      /* Перенос строк */
+        overflow-x: auto;           /* Горизонтальный скролл */
+        font-size: 0.9rem;
+        padding: 1rem;
+        background: rgba(0, 0, 0, 0.4);
+        border-radius: 8px;
+    }
+}
+
+@media (min-width: 769px) {
+    /* Только десктопная версия видна */
+    .mobile-only {
+        display: none;
+    }
+
+    .desktop-only {
+        display: block;
+    }
+
+    /* Делаем <pre> красивым на десктопе */
+    .desktop-only pre {
+        font-family: monospace;
+        font-size: 1rem;
+        line-height: 1.5;
+        background: rgba(0, 0, 0, 0.3);
+        padding: 1.5rem;
+        border-radius: 8px;
+        overflow-x: auto;
+    }
 }
 
 /* Стили для подзаголовков разделов */
@@ -329,7 +409,7 @@ footer {
 }
 
 /* Адаптивность */
-@media (max-width: 768px) {
+/*@media (max-width: 768px) {
     .container {
         width: 95%;
     }
@@ -345,7 +425,7 @@ footer {
     .section h2 {
         font-size: 1.8rem;
     }
-}
+}*/
 
 footer {
     position: relative;
