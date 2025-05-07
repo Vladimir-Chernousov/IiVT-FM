@@ -35,6 +35,17 @@ document.addEventListener("DOMContentLoaded", function () {
     viewFactor: 0.33
   });
 
+   ScrollReveal().reveal('.section.desktop-only', {
+     duration: 800,               // Длительность анимации
+     origin: 'bottom',            // Откуда появляется (снизу)
+     distance: '40px',            // На какое расстояние двигается
+     interval: 200,               // Интервал между элементами (если несколько)
+     reset: true,                 // Повторная анимация при уходе и возврате
+     viewFactor: 0.4,             // Активация при появлении на 40% экрана
+     opacity: 0,                  // Начальная прозрачность
+     scale: 0.95                  // Лёгкое уменьшение при старте (опционально)
+   });
+
   // Авторские ссылки
   ScrollReveal().reveal('.author-link', {
     duration: 600,

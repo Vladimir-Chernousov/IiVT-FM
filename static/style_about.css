@@ -38,10 +38,6 @@ body {
     100% { transform: scale(1); }
 }
 
-.back-to-top {
-    animation: pulse 2.5s infinite ease-in-out;
-}
-
 .container {
     width: 90%;
     max-width: 1200px;
@@ -466,7 +462,9 @@ footer {
         #e34a3a
     );
     background-size: 400% 400%;
-    animation: gradientShift 6s ease infinite;
+    animation:
+      gradientShift 6s ease infinite,
+      pulse 2.5s infinite ease-in-out;
     border: none;
     color: white;
     color: white;
@@ -516,4 +514,22 @@ footer {
 
 .author-link:hover {
     color: #f0c418 !important;
+}
+
+/*полоса прокрутки для сафари, хрома, эдж*/
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #f0c418, #b21f1f);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #f0c418;
 }
