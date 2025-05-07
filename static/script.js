@@ -15,4 +15,25 @@ document.addEventListener("DOMContentLoaded", function () {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   }
+
+  ScrollReveal().reveal('.project-header', {
+        duration: 1000,
+        origin: 'top',
+        distance: '50px'
+    });
+
+    ScrollReveal().reveal('.section, .subsection, .authors', {
+        duration: 800,
+        origin: 'bottom',
+        distance: '40px',
+        interval: 200
+    });
+
+    ScrollReveal().reveal('.author-link', {
+        duration: 600,
+        origin: 'left',
+        distance: '30px',
+        delay: 200
+    });
 });
+

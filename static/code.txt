@@ -684,3 +684,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+
+не работает пульсация и появление секций не исчезает после ухода их вида
