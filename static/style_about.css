@@ -4,12 +4,32 @@
 /* Общие стили */
 body {
     font-family: 'Open Sans', sans-serif;
-    background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+    background: linear-gradient(135deg,
+        #1a2a6c, /* Темно-синий */
+        #3d3e98, /* Фиолетовый */
+        #7b3f9e, /* Пурпурный */
+        #b21f1f, /* Бордовый */
+        #e34a3a  /* Красно-оранжевый */
+    );
+    background-size: 400% 400%;
+    animation: gradientShift 4s ease-in-out infinite;
     color: white;
     margin: 0;
     padding: 0;
     line-height: 1.6;
-    overflow-x: hidden; /* Скрываем горизонтальную прокрутку */
+    overflow-x: hidden;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .container {
@@ -428,7 +448,17 @@ footer {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: #a92227;
+    background: linear-gradient(135deg,
+        #1a2a6c,
+        #3d3e98,
+        #7b3f9e,
+        #b21f1f,
+        #e34a3a
+    );
+    background-size: 400% 400%;
+    animation: gradientShift 6s ease infinite;
+    border: none;
+    color: white;
     color: white;
     font-size: 24px;
     display: flex;
