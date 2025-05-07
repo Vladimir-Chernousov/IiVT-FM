@@ -16,24 +16,33 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // Показываем .project-header при появлении
   ScrollReveal().reveal('.project-header', {
-        duration: 1000,
-        origin: 'top',
-        distance: '50px'
-    });
+    duration: 1000,
+    origin: 'top',
+    distance: '50px',
+    reset: true, // Анимация повторяется при уходе и возврате
+    viewFactor: 0.33 // Срабатывает, когда элемент виден на 1/3 экрана
+  });
 
-    ScrollReveal().reveal('.section, .subsection, .authors', {
-        duration: 800,
-        origin: 'bottom',
-        distance: '40px',
-        interval: 200
-    });
+  // Основные секции и подсекции
+  ScrollReveal().reveal('.section, .subsection, .authors', {
+    duration: 800,
+    origin: 'bottom',
+    distance: '40px',
+    interval: 200,
+    reset: true,
+    viewFactor: 0.33
+  });
 
-    ScrollReveal().reveal('.author-link', {
-        duration: 600,
-        origin: 'left',
-        distance: '30px',
-        delay: 200
-    });
+  // Авторские ссылки
+  ScrollReveal().reveal('.author-link', {
+    duration: 600,
+    origin: 'left',
+    distance: '30px',
+    delay: 200,
+    reset: true,
+    viewFactor: 0.33
+  });
 });
 
