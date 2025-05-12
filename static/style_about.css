@@ -406,13 +406,6 @@ ul, ol {
     }
 }
 
-/* Стили для подвала */
-footer {
-    text-align: center;
-    padding: 1rem 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    margin-top: 3rem;
-}
 
 /* Анимации */
 @keyframes fadeInDown {
@@ -434,14 +427,73 @@ footer {
     }
 }
 
-
-footer {
-    position: relative;
+/* Стили для подвала */
+/* === Футер === */
+.site-footer {
+    background: linear-gradient(135deg,
+        #1a2a6c,
+        #3d3e98,
+        #7b3f9e,
+        #b21f1f,
+        #e34a3a
+    );
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite;
+    color: white;
+    padding: 2rem 1rem 3rem;
     text-align: center;
-    padding: 2rem 0 3rem; /* Увеличиваем нижний padding для кнопки */
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    margin-top: 3rem;
-    background: rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.footer-text {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    transition: opacity 0.3s ease;
+}
+
+.footer-text:hover {
+    opacity: 1;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.social-icon.github:hover {
+    background-color: #333;
+    transform: translateY(-4px);
+}
+
+.social-icon.vk:hover {
+    background-color: #4c75a3;
+    transform: translateY(-4px);
 }
 
 
@@ -483,17 +535,6 @@ footer {
     transform: scale(1.1) translateZ(0);
 }
 
-@media (max-width: 768px) {
-    .back-to-top {
-        right: 20px;
-        bottom: 20px !important;
-        top: auto !important;
-        width: 45px;
-        height: 45px;
-        font-size: 20px;
-    }
-}
-
 /* Мобильная версия */
 @media (max-width: 768px) {
     .back-to-top {
@@ -505,6 +546,26 @@ footer {
     }
 }
 
+@media (max-width: 768px) {
+    .back-to-top {
+        right: 20px;
+        bottom: 20px !important;
+        top: auto !important;
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+    }
+
+    .footer-content {
+        padding: 1rem;
+    }
+
+    .social-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
+    }
+}
 /* Стили для ссылок авторов с классом */
 .author-link {
     color: inherit !important;

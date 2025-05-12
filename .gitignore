@@ -162,3 +162,5 @@ cython_debug/
 .idea/
 
 # Static files
+.static/code.txt
+.static/combined.py
