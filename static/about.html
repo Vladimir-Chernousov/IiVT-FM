@@ -13,11 +13,12 @@
     <body>
     <div class="container">
         <header class="project-header">
-            <h1>Файловый Менеджер IiVT-FM на Python с PyQt5</h1>
+            <h1 class="group">IiVT-FM</h1>
+            <h2>Файловый Менеджер на Python с PyQt5</h2>
             <p>Этот проект представляет собой простой файловый менеджер, разработанный на языке Python с использованием библиотеки PyQt для создания графического интерфейса. <br> Интерфейс был разработан с помощью Qt Designer и включает в себя основные функции для работы с файловой системой.</p>
         </header>
 
-        <section class="section">
+        <section class="section" id="features">
             <h2>Особенности</h2>
             <ul>
                 <li><strong>Графический Интерфейс (GUI):</strong>  Интуитивно понятный интерфейс, созданный с помощью Qt Designer.</li>
@@ -37,8 +38,8 @@
             </ul>
         </section>
 
-        <section class="section">
-            <h2>Используемые технологии</h2>
+        <section class="section" id="technologies">
+            <h2 class="typewriter">Используемые технологии</h2>
             <ul>
                 <li><strong>Python 3.7+:</strong> Язык программирования.</li>
                 <li><strong>PyQt5:</strong>  Библиотека для создания графического интерфейса.</li>
@@ -46,47 +47,86 @@
             </ul>
         </section>
 
-        <section class="section">
-            <h2>Установка программы</h2>
+        <section class="section" id="installation">
+            <h2 class="typewriter">Установка программы</h2>
             <ul>
                 <li><strong>Убедитесь, что Python установлен на вашем компьютере.</strong>  Рекомендуется использовать Python 3.7 или новее.</li>
                 <li><strong>Установите необходимые библиотеки:</strong>
                 <pre><code>pip install -r requirements</code></pre></li>
                 <li><strong>Клонируйте репозиторий с проектом:</strong>
-                <pre><code>git clone <a href="https://github.com/Vladimir-Chernousov/IiVT-FM.git">https://github.com/Vladimir-Chernousov/IiVT-FM.git</a> и после этого: cd IiVT-FM</code></pre>
+                <pre><code>1) Выбор репозитория git clone <a href="https://github.com/Vladimir-Chernousov/IiVT-FM.git">по ссылке</a></code></pre>
+                <pre><code>2) Выбираем диск: cd IiVT-FM</code></pre>
             </li>
             </ul>
         </section>
 
-        <section class="section">
-            <h2>Структура проекта</h2>
-            <pre>
-                file_manager/
-                ├── .gitignore              # Игнорируемые файлы git
-                ├── about.html              # разметка файла информации о проекте в версии веб
-                ├── style_about.css         # применение стилей для файла с расширением .html
-                ├── script.js               # скрипт, добавляющий дополнительную анимацию
-                ├── file_manager.py         # Основной скрипт приложения
-                ├── main.py                 # Скрипт запуска программы
-                ├── main_window_disigne.py  # Дизайн основного окна программы
-                ├── main_window_disigne.ui  # UI-файл, сгенерированный Qt Designer
-                ├── requirements.txt        # Список библиотек, необходимых для работы программы
-                ├── welcome_widget.py       # Приветствие с пользователем
-                ├── icon.png                # Иконка программы в расширении png
-                ├── favicon.ico             # Готовая иконка программы
-                ├── file_manager.ui         # UI-файл, сгенерированный Qt Designer
-                ├── readme.txt              # Информация о проекте
-                ├── Документация.docx       # Документация программы
-                └── README.md               # Этот файл
-            </pre>
-            <h2>Запуск программы:</h2>
-            <p>Чтобы запустить файловый менеджер, выполните следующую команду в терминале, находясь в папке проекта:
-              <strong><em>python main.py</em></strong>
-               Или запустите <strong><em>.exe</em></strong> файл
+        <section class="section mobile-only" id="structure">
+    <h2>Структура проекта</h2>
+    <pre>
+file_manager/
+├── .gitignore
+│     # Игнорируемые файлы git
+├── about.html
+│     # разметка файла информации
+├── style_about.css
+│     # стили для html
+├── script.js
+│     # скрипт для html
+├── file_manager.py
+│     # Основной скрипт приложения
+├── main.py
+│     # Скрипт запуска программы
+├── main_window_disigne.py
+│     # Дизайн основного окна программы
+├── main_window_disigne.ui
+│     # UI-файл из Qt Designer
+├── requirements.txt
+│     # Список нужных библиотек
+├── welcome_widget.py
+│     # Приветствие с пользователем
+├── icon.png
+│     # Иконка программы в расширении png
+├── favicon.ico
+│     # Готовая иконка программы
+├── file_manager.ui
+│     # UI-файл, сгенерированный Qt Designer
+├── readme.txt
+│     # Информация о проекте
+├── Документация.docx
+│     # Документация программы
+├── README.md
+│     # Этот файл
+    </pre>
+    <h2>Запуск программы:</h2>
+    <p>Чтобы запустить файловый менеджер, выполните следующую команду в терминале, находясь в папке проекта:
+        <strong><em>python main.py</em></strong>
+        Или запустите <strong><em>.exe</em></strong> файл
     </p>
-        </section>
+    </section>
 
-        <div class="subsection">
+    <section class="section desktop-only">
+        <pre>
+file_manager/
+├── .gitignore                  # Игнорируемые файлы git
+├── about.html                  # разметка файла информации
+├── style_about.css             # стили для html
+├── script.js                   # скрипт для html
+├── file_manager.py             # Основной скрипт приложения
+├── main.py                     # Скрипт запуска программы
+├── main_window_disigne.py      # Дизайн основного окна программы
+├── main_window_disigne.ui      # UI-файл из Qt Designer
+├── requirements.txt            # Список нужных библиотек
+├── welcome_widget.py           # Приветствие с пользователем
+├── icon.png                    # Иконка программы в расширении png
+├── favicon.ico                 # Готовая иконка программы
+├── file_manager.ui             # UI-файл, сгенерированный Qt Designer
+├── readme.txt                  # Информация о проекте
+├── Документация.docx           # Документация программы
+└── README.md                   # Этот файл
+        </pre>
+    </section>
+
+        <div class="subsection" id="usage">
             <h3>Как использовать</h3>
             <ul>
                 <li>Навигация: Используйте дерево в левой части окна для навигации по папкам.</li>
@@ -123,21 +163,36 @@
                   <li>Улучшение пользовательского интерфейса: Добавить больше опций настройки внешнего вида и поведения программы.</li>
             </ul>
         </div>
-        <div class="authors">
+        <div class="authors" id="authors">
             <h3>Авторы проекта</h3>
             <ul>
-                <li>Морозов Константин</li>
-                <li>Черноусов Владимир</li>
-                <li>Громов Сергей</li>
-                <li>Ягафаров Илья</li>
-                <li>Горлов Даниил</li>
-                <li>Перегудов Владислав</li>
+                <li><a href="https://vk.com/kocmop" class="author-link" target="_blank">Морозов Константин</a></li>
+                <li><a href="https://vk.com/chernousov555" class="author-link" target="_blank">Черноусов Владимир</a></li>
+                <li><a href="https://vk.com/scarletflow" class="author-link" target="_blank">Громов Сергей</a></li>
+                <li><a href="https://vk.com/id363726633" class="author-link" target="_blank">Ягафаров Илья</a></li>
+                <li><a href="https://vk.com/clown_danyya" class="author-link" target="_blank">Горлов Даниил</a></li>
+                <li><a href="https://vk.com/rabes_v" class="author-link" target="_blank">Перегудов Владислав</a></li>
             </ul>
         </div>
     </div>
 
-    <footer>
-         <p>&copy; 2024 ИиВТ-21_WINNERS</p>
-    </footer>
+    <footer class="site-footer">
+    <div class="footer-content">
+        <!-- Текст копирайта -->
+        <p class="footer-text">&copy; 2025 ИиВТ-21_WINNERS • Все права защищены</p>
+
+        <!-- Социальные иконки -->
+        <div class="social-icons">
+            <a href="https://github.com/Vladimir-Chernousov/IiVT-FM.git" target="_blank" class="social-icon github" aria-label="GitHub проекта">
+                <svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.795-.26.795-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- Кнопка "Наверх" -->
+    <div class="back-to-top">↑</div>
+</footer>
+    <script src="https://unpkg.com/scrollreveal"></script>
+
     </body>
     </html>

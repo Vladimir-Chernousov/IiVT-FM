@@ -1,0 +1,596 @@
+/* Подключение шрифтов */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap');
+
+/* Общие стили */
+body {
+    font-family: 'Open Sans', sans-serif;
+    background: linear-gradient(135deg,
+        #1a2a6c, /* Темно-синий */
+        #3d3e98, /* Фиолетовый */
+        #7b3f9e, /* Пурпурный */
+        #b21f1f, /* Бордовый */
+        #e34a3a  /* Красно-оранжевый */
+    );
+    background-size: 400% 400%;
+    animation: gradientShift 4s ease-in-out infinite;
+    color: white;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+ul, ol {
+    padding-left: 20px;
+}
+
+/* Стили для заголовка и описания проекта */
+.project-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.project-header h1 {
+    font-size: 3rem;
+    letter-spacing: 1px;
+    animation: fadeInDown 1s ease-out;
+}
+
+.project-header p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    animation: fadeIn 1.2s ease-out;
+}
+
+/* Добавьте эти стили в ваш CSS файл */
+.project-header .group {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #f0c418;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    padding: 0 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.project-header .group::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: #f0c418;
+    border-radius: 3px;
+}
+
+.project-header:hover .group {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+/* Для мобильных устройств */
+@media (max-width: 768px) {
+    .project-header .group {
+        font-size: 2rem;
+        padding: 0 1.5rem;
+    }
+}
+
+
+/* Стили для блоков особенностей, технологий, установки и структуры */
+.section {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.section h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 0.5rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 100%;
+}
+
+.section ul,
+.section ol {
+    list-style: none;
+    padding: 0;
+}
+
+.section ul li,
+.section ol li {
+    margin-bottom: 0.8rem;
+    position: relative;
+    padding-left: 1.5em; /* Для отступа слева */
+}
+
+.section ul li::before,
+.section ol li::before {
+    content: '';
+    position: absolute;
+    top: 0.8em;
+    left: 0;
+    transform: translateY(-50%);
+    width: 8px; /* Размер маркера */
+    height: 8px; /* Размер маркера */
+    border-radius: 50%;
+    background-color: #f0c418; /* Цвет маркера */
+}
+
+.section ol li::before {
+    content: counter(list-item);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #f0c418;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    padding-top: 2px;
+}
+
+.section ol {
+    counter-reset: list-item;
+}
+
+.section ol li {
+    counter-increment: list-item;
+}
+
+.section a {
+    color: #64dd17;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.section a:hover {
+    color: #fff;
+}
+
+/* Стили для подзаголовков разделов */
+.subsection {
+    margin-bottom: 2rem;
+}
+
+.subsection h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 0.3rem;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+
+    .project-header h1 {
+        font-size: 2.5rem;
+    }
+
+    .project-header p {
+        font-size: 1rem;
+    }
+
+    .section {
+        padding: 1.5rem;
+    }
+
+    .section h2 {
+        font-size: 1.8rem;
+    }
+
+    /* Только мобильная версия видна */
+    .mobile-only {
+        display: block;
+    }
+
+    .desktop-only {
+        display: none;
+    }
+
+    /* Делаем <pre> читабельным на мобильных */
+    .mobile-only pre {
+        white-space: pre-wrap;      /* Перенос строк */
+        overflow-x: auto;           /* Горизонтальный скролл */
+        font-size: 0.9rem;
+        padding: 1rem;
+        background: rgba(0, 0, 0, 0.4);
+        border-radius: 8px;
+    }
+}
+
+@media (min-width: 769px) {
+    /* Только десктопная версия видна */
+    .mobile-only {
+        display: none;
+    }
+
+    .desktop-only {
+        display: block;
+    }
+
+    /* Делаем <pre> красивым на десктопе */
+    .desktop-only pre {
+        font-family: monospace;
+        font-size: 1rem;
+        line-height: 1.5;
+        background: rgba(0, 0, 0, 0.3);
+        padding: 1.5rem;
+        border-radius: 8px;
+        overflow-x: auto;
+    }
+}
+
+/* Стили для подзаголовков разделов */
+.subsection {
+    margin-bottom: 2rem;
+}
+
+.subsection h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 0.3rem;
+}
+
+.authors {
+    text-align: center;
+    margin: 3rem auto;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    max-width: 800px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.authors:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.authors h3 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    color: #f0c418;
+    position: relative;
+    display: block;
+    text-align: center;
+    width: 100%;
+}
+
+.authors h3::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: #f0c418;
+    border-radius: 3px;
+}
+
+.authors ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem 3rem;
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    text-align: left;
+    width: fit-content;
+}
+
+.authors li {
+    padding: 0.5rem 1rem 0.5rem 1.5rem;
+    position: relative;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.authors li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background: #f0c418;
+    border-radius: 50%;
+}
+
+.authors li:hover {
+    transform: translateX(10px);
+    color: #f0c418;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .authors {
+        padding: 1.5rem;
+        margin: 2rem auto;
+    }
+
+    .authors h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .authors ul {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        text-align: center;
+    }
+
+    .authors li {
+        padding: 0.5rem 0 0.5rem 1.5rem;
+        text-align: left;
+        display: block;
+    }
+
+    .authors li::before {
+        left: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .authors {
+        padding: 1rem;
+    }
+
+    .authors h3 {
+        font-size: 1.3rem;
+    }
+
+    .authors li {
+        font-size: 1rem;
+    }
+}
+
+
+/* Анимации */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Стили для подвала */
+/* === Футер === */
+.site-footer {
+    background: linear-gradient(135deg,
+        #1a2a6c,
+        #3d3e98,
+        #7b3f9e,
+        #b21f1f,
+        #e34a3a
+    );
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite;
+    color: white;
+    padding: 2rem 1rem 3rem;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.footer-text {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    transition: opacity 0.3s ease;
+}
+
+.footer-text:hover {
+    opacity: 1;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.social-icon.github:hover {
+    background-color: #333;
+    transform: translateY(-4px);
+}
+
+.social-icon.vk:hover {
+    background-color: #4c75a3;
+    transform: translateY(-4px);
+}
+
+
+.back-to-top {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg,
+        #1a2a6c,
+        #3d3e98,
+        #7b3f9e,
+        #b21f1f,
+        #e34a3a
+    );
+    background-size: 400% 400%;
+    animation:
+      gradientShift 6s ease infinite,
+      pulse 2.5s infinite ease-in-out;
+    border: none;
+    color: white;
+    color: white;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    transform: translateZ(0); /* Важно для мобильных */
+    line-height: 1;
+}
+
+.back-to-top:hover {
+    background-color: #8c1d22;
+    transform: scale(1.1) translateZ(0);
+}
+
+/* Мобильная версия */
+@media (max-width: 768px) {
+    .back-to-top {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+        top: -25px;
+        right: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .back-to-top {
+        right: 20px;
+        bottom: 20px !important;
+        top: auto !important;
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+    }
+
+    .footer-content {
+        padding: 1rem;
+    }
+
+    .social-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
+    }
+}
+/* Стили для ссылок авторов с классом */
+.author-link {
+    color: inherit !important;
+    text-decoration: none !important;
+    transition: color 0.3s ease;
+}
+
+.author-link:hover {
+    color: #f0c418 !important;
+}
+
+/*полоса прокрутки для сафари, хрома, эдж*/
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #f0c418, #b21f1f);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #f0c418;
+}
