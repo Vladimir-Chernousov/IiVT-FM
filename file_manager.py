@@ -7,6 +7,7 @@ from operator import index
 import requests
 import shutil
 import win32file
+import subprocess
 from PyQt5.QtCore import QDir, QFileInfo
 from PyQt5.QtWidgets import QApplication, QFileSystemModel, QTreeView, \
                             QMainWindow, QMenu, QMessageBox, QInputDialog
@@ -257,16 +258,16 @@ class FileManager(QMainWindow):
             os.system('start notepad "' + self.current_path + '"')
 
     def open_paint(self):
-        os.system("start mspaint")
+        subprocess.run(["mspaint"])
 
     def open_calc(self):
-        os.system("start calc")
+        subprocess.run(["calc"])
 
     def open_notepad(self):
-        os.system("start notepad")
+        subprocess.run(["notepad"])
 
     def open_taskmgr(self):
-        os.system("start taskmgr")
+        subprocess.run(["taskmgr"])
 
     def open_cmd(self):
         os.system("start cmd")
