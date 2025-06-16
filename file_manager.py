@@ -63,7 +63,6 @@ class FileManager(QMainWindow):
         if self.model.filePath(index) != '':
             self.current_path = self.model.filePath(index)
             self.is_dir = self.model.isDir(index)
-            print(self.current_path)
 
     def choose_box(self):
         if self.ui.checkBox.isChecked():
