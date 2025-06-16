@@ -57,11 +57,13 @@ class FileManager(QMainWindow):
         self.file_source = ''
         self.file_name = ''
         self.is_dir = True
+        self.is_dir_source = True
 
     def on_tree_clicked(self, index):
         if self.model.filePath(index) != '':
             self.current_path = self.model.filePath(index)
             self.is_dir = self.model.isDir(index)
+            print(self.current_path)
 
     def choose_box(self):
         if self.ui.checkBox.isChecked():
@@ -73,6 +75,7 @@ class FileManager(QMainWindow):
         if self.current_path == '':
             QMessageBox.about(self, 'Оповещение', 'Ничего не выбрано')
             return None
+        self.is_dir_source = self.is_dir
         self.action_flag = 'move'
         self.file_source = self.current_path
         self.file_name = self.current_path.split("/")[-1]
@@ -81,6 +84,7 @@ class FileManager(QMainWindow):
         if self.current_path == '':
             QMessageBox.about(self, 'Оповещение', 'Ничего не выбрано')
             return None
+        self.is_dir_source = self.is_dir
         self.action_flag = 'copy'
         self.file_source = self.current_path
         self.file_name = self.current_path.split("/")[-1]
@@ -89,17 +93,29 @@ class FileManager(QMainWindow):
         if self.file_source != '':
             try:
                 if self.action_flag == 'move':
-                    if self.is_dir:
-                        win32file.MoveFile(self.file_source, self.current_path + '/' + self.file_name)
+                    if self.is_dir_source:
+                        if self.is_dir:
+                            shutil.move(self.file_source, self.current_path + '/' + self.file_name)
+                        else:
+                            shutil.move(self.file_source,
+                                            '/'.join(self.current_path.split('/')[:-1]) + '/' + self.file_name)
                     else:
-                        self.current_path = '/'.join(self.current_path.split('/')[:-1])
-                        win32file.MoveFile(self.file_source, self.current_path + '/' + self.file_name)
+                        if self.is_dir:
+                            win32file.MoveFile(self.file_source, self.current_path + '/' + self.file_name)
+                        else:
+                            win32file.MoveFile(self.file_source,
+                                               '/'.join(self.current_path.split('/')[:-1]) + '/' + self.file_name)
                 elif self.action_flag == 'copy':
-                    if self.is_dir:
-                        win32file.CopyFile(self.file_source, self.current_path + '/' + self.file_name, 1)
+                    if self.is_dir_source:
+                        if  self.is_dir:
+                            shutil.copytree(self.file_source, self.current_path + '/' + self.file_name)
+                        else:
+                            shutil.copytree(self.file_source, '/'.join(self.current_path.split('/')[:-1]) + '/' + self.file_name)
                     else:
-                        self.current_path = '/'.join(self.current_path.split('/')[:-1])
-                        win32file.CopyFile(self.file_source, self.current_path + '/' + self.file_name, 1)
+                        if self.is_dir:
+                            win32file.CopyFile(self.file_source, self.current_path + '/' + self.file_name, 1)
+                        else:
+                            win32file.CopyFile(self.file_source, '/'.join(self.current_path.split('/')[:-1]) + '/' + self.file_name, 1)
                 self.action_flag = ''
                 self.file_source = ''
                 self.file_name = ''
@@ -228,7 +244,8 @@ class FileManager(QMainWindow):
         text, status = QInputDialog.getText(self, 'Переименование', 'Введите новое имя:')
         if status:
             try:
-                os.system('rename "' + self.current_path + '" ' + text)
+                os.rename(self.current_path, '/'.join(self.current_path.split('/')[:-1]) + '/' + text)
+                self.current_path = '/'.join(self.current_path.split('/')[:-1])
             except Exception as e:
                 QMessageBox.about(self, 'Оповещение', e.__str__())
 
