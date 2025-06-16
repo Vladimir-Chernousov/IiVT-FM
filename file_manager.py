@@ -5,6 +5,8 @@ from collections import deque
 from operator import index
 
 import requests
+import shutil
+import win32file
 from PyQt5.QtCore import QDir, QFileInfo
 from PyQt5.QtWidgets import QApplication, QFileSystemModel, QTreeView, \
                             QMainWindow, QMenu, QMessageBox, QInputDialog
@@ -51,11 +53,14 @@ class FileManager(QMainWindow):
 
         self.current_path = ''
         self.command_string = ''
+        self.action_flag = ''
+        self.file_source = ''
+        self.file_name = ''
         self.is_dir = True
 
     def on_tree_clicked(self, index):
         if self.model.filePath(index) != '':
-            self.current_path = self.model.filePath(index).replace('/', '\\')
+            self.current_path = self.model.filePath(index)
             self.is_dir = self.model.isDir(index)
 
     def choose_box(self):
@@ -68,26 +73,36 @@ class FileManager(QMainWindow):
         if self.current_path == '':
             QMessageBox.about(self, 'Оповещение', 'Ничего не выбрано')
             return None
-        self.command_string = 'move /y "' + self.current_path + '"'
+        self.action_flag = 'move'
+        self.file_source = self.current_path
+        self.file_name = self.current_path.split("/")[-1]
 
     def pbn_copy(self):
         if self.current_path == '':
             QMessageBox.about(self, 'Оповещение', 'Ничего не выбрано')
             return None
-        if self.is_dir:
-            self.command_string = 'xcopy /e /s /y "' + self.current_path + '"'
-        else:
-            self.command_string = 'copy /y "' + self.current_path + '"'
+        self.action_flag = 'copy'
+        self.file_source = self.current_path
+        self.file_name = self.current_path.split("/")[-1]
 
     def pbn_paste(self):
-        if self.command_string != '':
+        if self.file_source != '':
             try:
-                if self.is_dir:
-                    self.command_string += ' "' + self.current_path + '"'
-                else:
-                    self.command_string += ' "' + '\\'.join(self.current_path.split('\\')[:-1]) + '"'
-                os.system(self.command_string)
-                self.command_string = ''
+                if self.action_flag == 'move':
+                    if self.is_dir:
+                        win32file.MoveFile(self.file_source, self.current_path + '/' + self.file_name)
+                    else:
+                        self.current_path = '/'.join(self.current_path.split('/')[:-1])
+                        win32file.MoveFile(self.file_source, self.current_path + '/' + self.file_name)
+                elif self.action_flag == 'copy':
+                    if self.is_dir:
+                        win32file.CopyFile(self.file_source, self.current_path + '/' + self.file_name, 1)
+                    else:
+                        self.current_path = '/'.join(self.current_path.split('/')[:-1])
+                        win32file.CopyFile(self.file_source, self.current_path + '/' + self.file_name, 1)
+                self.action_flag = ''
+                self.file_source = ''
+                self.file_name = ''
             except Exception as e:
                 QMessageBox.about(self, 'Оповещение', e.__str__())
         else:
@@ -104,8 +119,8 @@ class FileManager(QMainWindow):
                                           QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
             if result == QMessageBox.Yes:
                 try:
-                    os.system('del /q /s "' + self.current_path + '"')
-                    self.current_path = '\\'.join(self.current_path.split('\\')[:-1])
+                    os.remove(self.current_path)
+                    self.current_path = '/'.join(self.current_path.split('/')[:-1])
                 except Exception as e:
                     QMessageBox.about(self, 'Оповещение', e.__str__())
         else:
@@ -114,8 +129,8 @@ class FileManager(QMainWindow):
                                       QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
             if result == QMessageBox.Yes:
                 try:
-                    os.system('rmdir /q /s "' + self.current_path + '"')
-                    self.current_path = '\\'.join(self.current_path.split('\\')[:-1])
+                    shutil.rmtree(self.current_path)
+                    self.current_path = '/'.join(self.current_path.split('/')[:-1])
                 except Exception as e:
                     QMessageBox.about(self, 'Оповещение', e.__str__())
 
@@ -196,12 +211,12 @@ class FileManager(QMainWindow):
         if status:
             if self.is_dir:
                 try:
-                    os.system('mkdir "' + self.current_path + '\\' + text + '"')
+                    os.mkdir(self.current_path + '/' + text)
                 except Exception as e:
                     QMessageBox.about(self, 'Оповещение', e.__str__())
             else:
                 try:
-                    os.system('mkdir "' + '\\'.join(self.current_path.split('\\')[:-1]) + '\\' + text + '"')
+                    os.mkdir('/'.join(self.current_path.split('/')[:-1]) + '/' + text)
                 except Exception as e:
                     QMessageBox.about(self, 'Оповещение', e.__str__())
 
