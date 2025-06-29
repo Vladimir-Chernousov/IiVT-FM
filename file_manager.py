@@ -327,7 +327,7 @@ class FileManager(QMainWindow):
 class AboutProgram(QWidget):
     def __init__(self):
         super(AboutProgram, self).__init__()
-        self.ui =about_program_designe.Ui_Form()
+        self.ui = about_program_designe.Ui_Form()
         self.ui.setupUi(self)
         self.ui.pbn_site.clicked.connect(self.open_site)
 
