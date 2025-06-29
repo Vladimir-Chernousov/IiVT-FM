@@ -10,8 +10,9 @@ import win32file
 import subprocess
 from PyQt5.QtCore import QDir, QFileInfo
 from PyQt5.QtWidgets import QApplication, QFileSystemModel, QTreeView, \
-                            QMainWindow, QMenu, QMessageBox, QInputDialog
+    QMainWindow, QMenu, QMessageBox, QInputDialog, QWidget
 
+import about_program_designe
 import main_window_disigne
 
 class FileManager(QMainWindow):
@@ -213,11 +214,8 @@ class FileManager(QMainWindow):
         msg.exec_()
 
     def about(self):
-        try:
-            requests.get("http://193.124.22.221")
-            os.system("start http://193.124.22.221/")
-        except Exception:
-            webbrowser.open("static/about.html")
+        self.app2 = AboutProgram()
+        self.app2.show()
 
     def new_folder(self):
         if self.current_path == '':
@@ -324,6 +322,21 @@ class FileManager(QMainWindow):
         elif event.key() == 16777267:
             self.rename()
         event.accept()
+
+
+class AboutProgram(QWidget):
+    def __init__(self):
+        super(AboutProgram, self).__init__()
+        self.ui =about_program_designe.Ui_Form()
+        self.ui.setupUi(self)
+        self.ui.pbn_site.clicked.connect(self.open_site)
+
+    def open_site(self):
+        try:
+            requests.get("http://193.124.22.221")
+            os.system("start http://193.124.22.221/")
+        except Exception:
+            webbrowser.open("static/about.html")
 
 
 
