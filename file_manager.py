@@ -313,13 +313,14 @@ class FileManager(QMainWindow):
             self.open()
 
     def keyPressEvent(self, event):
+        print(event.key())
         if event.key() == 67 or event.key() == 16777268:
             self.pbn_copy()
         elif event.key() == 86 or event.key() == 16777269:
             self.pbn_paste()
         elif event.key() == 88:
             self.pbn_cut()
-        elif event.key() == 16777271 or event.key() == 16777223 or event.key() == 81:
+        elif event.key() == 16777271 or event.key() == 16777223 or event.key() == 81 or event.key() == 68:
             self.pbn_delete()
         elif event.key() == 16777264:
             self.about()
