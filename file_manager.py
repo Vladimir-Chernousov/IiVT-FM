@@ -333,8 +333,8 @@ class AboutProgram(QWidget):
 
     def open_site(self):
         try:
-            requests.get("http://193.124.22.221")
-            os.system("start http://193.124.22.221/")
+            requests.get("https://gravenaj.github.io/puls_clinic/index.html")
+            os.system("start https://gravenaj.github.io/puls_clinic/index.html")
         except Exception:
             webbrowser.open("static/about.html")
 
