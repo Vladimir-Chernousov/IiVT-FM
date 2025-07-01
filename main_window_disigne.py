@@ -160,6 +160,8 @@ class Ui_MainWindow(object):
         self.actionParametrs.setObjectName("actionParametrs")
         self.actionRedgedit = QtWidgets.QAction(MainWindow)
         self.actionRedgedit.setObjectName("actionRedgedit")
+        self.actionHelp2 = QtWidgets.QAction(MainWindow)
+        self.actionHelp2.setObjectName("actionHelp2")
         self.menuFile.addAction(self.actioninfo)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actioncopy_2)
@@ -167,6 +169,7 @@ class Ui_MainWindow(object):
         self.menuFile.addAction(self.actionpaste)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actiondelete)
+        self.menuHelp.addAction(self.actionHelp2)
         self.menuHelp.addAction(self.actionAbout_FileManager)
         self.menuOption.addAction(self.actionPaint)
         self.menuOption.addAction(self.actionCalk)
@@ -215,6 +218,7 @@ class Ui_MainWindow(object):
         self.actionCmd.setText(_translate("MainWindow", "Командная строка"))
         self.actionParametrs.setText(_translate("MainWindow", "Параметры системы"))
         self.actionRedgedit.setText(_translate("MainWindow", "Редактор реестра"))
+        self.actionHelp2.setText(_translate("MainWindow", "Help"))
 
 
 if __name__ == "__main__":

@@ -290,6 +290,7 @@
     <property name="title">
      <string>Help</string>
     </property>
+    <addaction name="actionHelp2"/>
     <addaction name="actionAbout_FileManager"/>
    </widget>
    <widget class="QMenu" name="menuOption">
@@ -407,6 +408,11 @@
   <action name="actionRedgedit">
    <property name="text">
     <string>Редактор реестра</string>
+   </property>
+  </action>
+  <action name="actionHelp2">
+   <property name="text">
+    <string>Help</string>
    </property>
   </action>
  </widget>

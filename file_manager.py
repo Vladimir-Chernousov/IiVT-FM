@@ -13,6 +13,7 @@ from PyQt5.QtWidgets import QApplication, QFileSystemModel, QTreeView, \
     QMainWindow, QMenu, QMessageBox, QInputDialog, QWidget
 
 import about_program_designe
+import help_designe
 import main_window_disigne
 
 class FileManager(QMainWindow):
@@ -50,6 +51,7 @@ class FileManager(QMainWindow):
         self.ui.actionCmd.triggered.connect(self.open_cmd)
         self.ui.actionParametrs.triggered.connect(self.open_parameters)
         self.ui.actionRedgedit.triggered.connect(self.open_redgedit)
+        self.ui.actionHelp2.triggered.connect(self.open_help)
 
         self.ui.checkBox.clicked.connect(self.choose_box)
 
@@ -276,6 +278,10 @@ class FileManager(QMainWindow):
     def open_redgedit(self):
         os.system("start regedit")
 
+    def open_help(self):
+        self.app3 = Help()
+        self.app3.show()
+
     def contextMenuEvent(self, event):
         contextMenu = QMenu()
 
@@ -337,6 +343,12 @@ class AboutProgram(QWidget):
             os.system("start https://gravenaj.github.io/puls_clinic/index.html")
         except Exception:
             webbrowser.open("static/about.html")
+
+class Help(QWidget):
+    def __init__(self):
+        super(Help, self).__init__()
+        self.ui = help_designe.Ui_Form()
+        self.ui.setupUi(self)
 
 
 
