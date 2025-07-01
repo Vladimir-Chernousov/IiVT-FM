@@ -5,10 +5,15 @@ from collections import deque
 from operator import index
 
 import requests
+import shutil
+import win32file
+import subprocess
 from PyQt5.QtCore import QDir, QFileInfo
 from PyQt5.QtWidgets import QApplication, QFileSystemModel, QTreeView, \
-                            QMainWindow, QMenu, QMessageBox, QInputDialog
+    QMainWindow, QMenu, QMessageBox, QInputDialog, QWidget
 
+import about_program_designe
+import help_designe
 import main_window_disigne
 
 class FileManager(QMainWindow):
@@ -46,16 +51,21 @@ class FileManager(QMainWindow):
         self.ui.actionCmd.triggered.connect(self.open_cmd)
         self.ui.actionParametrs.triggered.connect(self.open_parameters)
         self.ui.actionRedgedit.triggered.connect(self.open_redgedit)
+        self.ui.actionHelp2.triggered.connect(self.open_help)
 
         self.ui.checkBox.clicked.connect(self.choose_box)
 
         self.current_path = ''
         self.command_string = ''
+        self.action_flag = ''
+        self.file_source = ''
+        self.file_name = ''
         self.is_dir = True
+        self.is_dir_source = True
 
     def on_tree_clicked(self, index):
         if self.model.filePath(index) != '':
-            self.current_path = self.model.filePath(index).replace('/', '\\')
+            self.current_path = self.model.filePath(index)
             self.is_dir = self.model.isDir(index)
 
     def choose_box(self):
@@ -68,26 +78,50 @@ class FileManager(QMainWindow):
         if self.current_path == '':
             QMessageBox.about(self, 'Оповещение', 'Ничего не выбрано')
             return None
-        self.command_string = 'move /y "' + self.current_path + '"'
+        self.is_dir_source = self.is_dir
+        self.action_flag = 'move'
+        self.file_source = self.current_path
+        self.file_name = self.current_path.split("/")[-1]
 
     def pbn_copy(self):
         if self.current_path == '':
             QMessageBox.about(self, 'Оповещение', 'Ничего не выбрано')
             return None
-        if self.is_dir:
-            self.command_string = 'xcopy /e /s /y "' + self.current_path + '"'
-        else:
-            self.command_string = 'copy /y "' + self.current_path + '"'
+        self.is_dir_source = self.is_dir
+        self.action_flag = 'copy'
+        self.file_source = self.current_path
+        self.file_name = self.current_path.split("/")[-1]
 
     def pbn_paste(self):
-        if self.command_string != '':
+        if self.file_source != '':
             try:
-                if self.is_dir:
-                    self.command_string += ' "' + self.current_path + '"'
-                else:
-                    self.command_string += ' "' + '\\'.join(self.current_path.split('\\')[:-1]) + '"'
-                os.system(self.command_string)
-                self.command_string = ''
+                if self.action_flag == 'move':
+                    if self.is_dir_source:
+                        if self.is_dir:
+                            shutil.move(self.file_source, self.current_path + '/' + self.file_name)
+                        else:
+                            shutil.move(self.file_source,
+                                            '/'.join(self.current_path.split('/')[:-1]) + '/' + self.file_name)
+                    else:
+                        if self.is_dir:
+                            win32file.MoveFile(self.file_source, self.current_path + '/' + self.file_name)
+                        else:
+                            win32file.MoveFile(self.file_source,
+                                               '/'.join(self.current_path.split('/')[:-1]) + '/' + self.file_name)
+                elif self.action_flag == 'copy':
+                    if self.is_dir_source:
+                        if  self.is_dir:
+                            shutil.copytree(self.file_source, self.current_path + '/' + self.file_name)
+                        else:
+                            shutil.copytree(self.file_source, '/'.join(self.current_path.split('/')[:-1]) + '/' + self.file_name)
+                    else:
+                        if self.is_dir:
+                            win32file.CopyFile(self.file_source, self.current_path + '/' + self.file_name, 1)
+                        else:
+                            win32file.CopyFile(self.file_source, '/'.join(self.current_path.split('/')[:-1]) + '/' + self.file_name, 1)
+                self.action_flag = ''
+                self.file_source = ''
+                self.file_name = ''
             except Exception as e:
                 QMessageBox.about(self, 'Оповещение', e.__str__())
         else:
@@ -104,8 +138,8 @@ class FileManager(QMainWindow):
                                           QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
             if result == QMessageBox.Yes:
                 try:
-                    os.system('del /q /s "' + self.current_path + '"')
-                    self.current_path = '\\'.join(self.current_path.split('\\')[:-1])
+                    os.remove(self.current_path)
+                    self.current_path = '/'.join(self.current_path.split('/')[:-1])
                 except Exception as e:
                     QMessageBox.about(self, 'Оповещение', e.__str__())
         else:
@@ -114,8 +148,8 @@ class FileManager(QMainWindow):
                                       QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
             if result == QMessageBox.Yes:
                 try:
-                    os.system('rmdir /q /s "' + self.current_path + '"')
-                    self.current_path = '\\'.join(self.current_path.split('\\')[:-1])
+                    shutil.rmtree(self.current_path)
+                    self.current_path = '/'.join(self.current_path.split('/')[:-1])
                 except Exception as e:
                     QMessageBox.about(self, 'Оповещение', e.__str__())
 
@@ -182,11 +216,8 @@ class FileManager(QMainWindow):
         msg.exec_()
 
     def about(self):
-        try:
-            requests.get("http://193.124.22.221")
-            os.system("start http://193.124.22.221/")
-        except Exception:
-            webbrowser.open("../static/about.html")
+        self.app2 = AboutProgram()
+        self.app2.show()
 
     def new_folder(self):
         if self.current_path == '':
@@ -196,12 +227,12 @@ class FileManager(QMainWindow):
         if status:
             if self.is_dir:
                 try:
-                    os.system('mkdir "' + self.current_path + '\\' + text + '"')
+                    os.mkdir(self.current_path + '/' + text)
                 except Exception as e:
                     QMessageBox.about(self, 'Оповещение', e.__str__())
             else:
                 try:
-                    os.system('mkdir "' + '\\'.join(self.current_path.split('\\')[:-1]) + '\\' + text + '"')
+                    os.mkdir('/'.join(self.current_path.split('/')[:-1]) + '/' + text)
                 except Exception as e:
                     QMessageBox.about(self, 'Оповещение', e.__str__())
 
@@ -213,7 +244,8 @@ class FileManager(QMainWindow):
         text, status = QInputDialog.getText(self, 'Переименование', 'Введите новое имя:')
         if status:
             try:
-                os.system('rename "' + self.current_path + '" ' + text)
+                os.rename(self.current_path, '/'.join(self.current_path.split('/')[:-1]) + '/' + text)
+                self.current_path = '/'.join(self.current_path.split('/')[:-1])
             except Exception as e:
                 QMessageBox.about(self, 'Оповещение', e.__str__())
 
@@ -226,16 +258,16 @@ class FileManager(QMainWindow):
             os.system('start notepad "' + self.current_path + '"')
 
     def open_paint(self):
-        os.system("start mspaint")
+        subprocess.run(["mspaint"])
 
     def open_calc(self):
-        os.system("start calc")
+        subprocess.run(["calc"])
 
     def open_notepad(self):
-        os.system("start notepad")
+        subprocess.run(["notepad"])
 
     def open_taskmgr(self):
-        os.system("start taskmgr")
+        subprocess.run(["taskmgr"])
 
     def open_cmd(self):
         os.system("start cmd")
@@ -245,6 +277,10 @@ class FileManager(QMainWindow):
 
     def open_redgedit(self):
         os.system("start regedit")
+
+    def open_help(self):
+        self.app3 = Help()
+        self.app3.show()
 
     def contextMenuEvent(self, event):
         contextMenu = QMenu()
@@ -277,13 +313,14 @@ class FileManager(QMainWindow):
             self.open()
 
     def keyPressEvent(self, event):
+        print(event.key())
         if event.key() == 67 or event.key() == 16777268:
             self.pbn_copy()
         elif event.key() == 86 or event.key() == 16777269:
             self.pbn_paste()
         elif event.key() == 88:
             self.pbn_cut()
-        elif event.key() == 16777271 or event.key() == 16777223 or event.key() == 81:
+        elif event.key() == 16777271 or event.key() == 16777223 or event.key() == 81 or event.key() == 68:
             self.pbn_delete()
         elif event.key() == 16777264:
             self.about()
@@ -292,6 +329,27 @@ class FileManager(QMainWindow):
         elif event.key() == 16777267:
             self.rename()
         event.accept()
+
+
+class AboutProgram(QWidget):
+    def __init__(self):
+        super(AboutProgram, self).__init__()
+        self.ui = about_program_designe.Ui_Form()
+        self.ui.setupUi(self)
+        self.ui.pbn_site.clicked.connect(self.open_site)
+
+    def open_site(self):
+        try:
+            requests.get("https://gravenaj.github.io/puls_clinic/index.html")
+            os.system("start https://gravenaj.github.io/puls_clinic/index.html")
+        except Exception:
+            webbrowser.open("static/about.html")
+
+class Help(QWidget):
+    def __init__(self):
+        super(Help, self).__init__()
+        self.ui = help_designe.Ui_Form()
+        self.ui.setupUi(self)
 
 
 

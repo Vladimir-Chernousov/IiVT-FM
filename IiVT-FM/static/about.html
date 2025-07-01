@@ -1,0 +1,198 @@
+
+        <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>IiVT-FM</title>
+        <link rel="stylesheet" href="style_about.css">
+        <script src="script.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    </head>
+    <body>
+    <div class="container">
+        <header class="project-header">
+            <h1 class="group">IiVT-FM</h1>
+            <h2>Файловый Менеджер на Python с PyQt5</h2>
+            <p>Этот проект представляет собой простой файловый менеджер, разработанный на языке Python с использованием библиотеки PyQt для создания графического интерфейса. <br> Интерфейс был разработан с помощью Qt Designer и включает в себя основные функции для работы с файловой системой.</p>
+        </header>
+
+        <section class="section" id="features">
+            <h2>Особенности</h2>
+            <ul>
+                <li><strong>Графический Интерфейс (GUI):</strong>  Интуитивно понятный интерфейс, созданный с помощью Qt Designer.</li>
+                <li><strong>Древовидное представление (QTreeView):</strong>  Отображение файловой системы в виде дерева, позволяющее удобно перемещаться по папкам.</li>
+                <li><strong>Меню Бар:</strong>  Традиционное меню для доступа к основным функциям программы.</li>
+                <li><strong>Контекстное Меню:</strong>  Контекстное меню, вызываемое правой кнопкой мыши, для быстрого доступа к операциям над файлами и папками.</li>
+                <li><strong>Горячие клавиши (Hotkeys):</strong> Поддержка горячих клавиш для ускорения работы.</li>
+                <li><strong>Основные операции над файлами:</strong>
+                <ul>
+                    <li><strong>Копирование (Copy):</strong> Копирование файлов и папок в буфер обмена.</li>
+                    <li><strong>Вставка (Paste):</strong> Вставка скопированных файлов и папок.</li>
+                    <li><strong>Удаление (Delete):</strong> Удаление файлов и папок.</li>
+                    <li><strong>Вырезка (Cut):</strong> Вырезка файла и вставка его в другое место.</li>
+                </ul>
+            </li>
+            <li><strong>Иконка приложения:</strong>  Иконка для приложения, добавляющая ему узнаваемости.</li>
+            </ul>
+        </section>
+
+        <section class="section" id="technologies">
+            <h2 class="typewriter">Используемые технологии</h2>
+            <ul>
+                <li><strong>Python 3.7+:</strong> Язык программирования.</li>
+                <li><strong>PyQt5:</strong>  Библиотека для создания графического интерфейса.</li>
+                <li><strong>Qt Designer:</strong> Инструмент для разработки GUI.</li>
+            </ul>
+        </section>
+
+        <section class="section" id="installation">
+            <h2 class="typewriter">Установка программы</h2>
+            <ul>
+                <li><strong>Убедитесь, что Python установлен на вашем компьютере.</strong>  Рекомендуется использовать Python 3.7 или новее.</li>
+                <li><strong>Установите необходимые библиотеки:</strong>
+                <pre><code>pip install -r requirements</code></pre></li>
+                <li><strong>Клонируйте репозиторий с проектом:</strong>
+                <pre><code>1) Выбор репозитория git clone <a href="https://github.com/Vladimir-Chernousov/IiVT-FM.git">по ссылке</a></code></pre>
+                <pre><code>2) Выбираем диск: cd IiVT-FM</code></pre>
+            </li>
+            </ul>
+        </section>
+
+        <section class="section mobile-only" id="structure">
+    <h2>Структура проекта</h2>
+    <pre>
+file_manager/
+├── .gitignore
+│     # Игнорируемые файлы git
+├── about.html
+│     # разметка файла информации
+├── style_about.css
+│     # стили для html
+├── script.js
+│     # скрипт для html
+├── file_manager.py
+│     # Основной скрипт приложения
+├── main.py
+│     # Скрипт запуска программы
+├── main_window_disigne.py
+│     # Дизайн основного окна программы
+├── main_window_disigne.ui
+│     # UI-файл из Qt Designer
+├── requirements.txt
+│     # Список нужных библиотек
+├── welcome_widget.py
+│     # Приветствие с пользователем
+├── icon.png
+│     # Иконка программы в расширении png
+├── favicon.ico
+│     # Готовая иконка программы
+├── file_manager.ui
+│     # UI-файл, сгенерированный Qt Designer
+├── readme.txt
+│     # Информация о проекте
+├── Документация.docx
+│     # Документация программы
+├── README.md
+│     # Этот файл
+    </pre>
+    <h2>Запуск программы:</h2>
+    <p>Чтобы запустить файловый менеджер, выполните следующую команду в терминале, находясь в папке проекта:
+        <strong><em>python main.py</em></strong>
+        Или запустите <strong><em>.exe</em></strong> файл
+    </p>
+    </section>
+
+    <section class="section desktop-only">
+        <pre>
+file_manager/
+├── .gitignore                  # Игнорируемые файлы git
+├── about.html                  # разметка файла информации
+├── style_about.css             # стили для html
+├── script.js                   # скрипт для html
+├── file_manager.py             # Основной скрипт приложения
+├── main.py                     # Скрипт запуска программы
+├── main_window_disigne.py      # Дизайн основного окна программы
+├── main_window_disigne.ui      # UI-файл из Qt Designer
+├── requirements.txt            # Список нужных библиотек
+├── welcome_widget.py           # Приветствие с пользователем
+├── icon.png                    # Иконка программы в расширении png
+├── favicon.ico                 # Готовая иконка программы
+├── file_manager.ui             # UI-файл, сгенерированный Qt Designer
+├── readme.txt                  # Информация о проекте
+├── Документация.docx           # Документация программы
+└── README.md                   # Этот файл
+        </pre>
+    </section>
+
+        <div class="subsection" id="usage">
+            <h3>Как использовать</h3>
+            <ul>
+                <li>Навигация: Используйте дерево в левой части окна для навигации по папкам.</li>
+                <li>Выбор: Выберите файлы или папки, кликнув по ним.</li>
+                <li>Контекстное меню: Кликните правой кнопкой мыши по файлу или папке, чтобы открыть контекстное меню с доступными операциями.</li>
+                <li>Меню: Используйте меню в правой части окна для доступа к функциям “Копировать”, “Вставить”, “Вырезать”, “Удалить”.</li>
+                <li>Горячие клавиши: Используйте сочетания клавиш Ctrl+C (копировать), Ctrl+V (вставить), Ctrl+X (вырезать), Delete (удалить).</li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <h3>Настройка</h3>
+            <ul>
+                <li>Настройка внешнего вида: Внешний вид интерфейса можно менять, редактируя файл file_manager.ui в Qt Designer.</li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <h3>Известные проблемы</h3>
+            <ul>
+                <li>Обработка ошибок: Реализация обработки ошибок может быть улучшена для более надежной работы.</li>
+                <li>Поддержка больших объемов данных: Производительность может снижаться при работе с очень большими файловыми структурами.</li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <h3>Дальнейшее развитие</h3>
+             <ul>
+                  <li>Предпросмотр файлов: Добавить возможность предпросмотра содержимого файлов (например, текста, изображений).</li>
+                  <li>Настройка горячих клавиш.</li>
+                  <li>Поиск: Реализовать функцию поиска файлов и папок.</li>
+                  <li>Сортировка: Добавить возможность сортировки файлов и папок по имени, размеру, дате.</li>
+                  <li>Поддержка drag-and-drop: Добавить возможность перетаскивания файлов и папок.</li>
+                  <li>Улучшение пользовательского интерфейса: Добавить больше опций настройки внешнего вида и поведения программы.</li>
+            </ul>
+        </div>
+        <div class="authors" id="authors">
+            <h3>Авторы проекта</h3>
+            <ul>
+                <li><a href="https://vk.com/kocmop" class="author-link" target="_blank">Морозов Константин</a></li>
+                <li><a href="https://vk.com/chernousov555" class="author-link" target="_blank">Черноусов Владимир</a></li>
+                <li><a href="https://vk.com/scarletflow" class="author-link" target="_blank">Громов Сергей</a></li>
+                <li><a href="https://vk.com/id363726633" class="author-link" target="_blank">Ягафаров Илья</a></li>
+                <li><a href="https://vk.com/clown_danyya" class="author-link" target="_blank">Горлов Даниил</a></li>
+                <li><a href="https://vk.com/rabes_v" class="author-link" target="_blank">Перегудов Владислав</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+    <div class="footer-content">
+        <!-- Текст копирайта -->
+        <p class="footer-text">&copy; 2025 ИиВТ-21_WINNERS • Все права защищены</p>
+
+        <!-- Социальные иконки -->
+        <div class="social-icons">
+            <a href="https://github.com/Vladimir-Chernousov/IiVT-FM.git" target="_blank" class="social-icon github" aria-label="GitHub проекта">
+                <svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.795-.26.795-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- Кнопка "Наверх" -->
+    <div class="back-to-top">↑</div>
+</footer>
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    </body>
+    </html>
